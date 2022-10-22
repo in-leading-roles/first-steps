@@ -9,7 +9,7 @@ export class UsersService {
     
     constructor(@InjectModel(User) private userRepository: typeof User, private roleService:RolesService) {}
 
-    async getAllUsers(){
+    async getAllUsers() {
         const users = await this.userRepository.findAll({include:{all:true}});
         return users;
     }

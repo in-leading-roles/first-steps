@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { RolesService } from 'src/roles/roles.service';
+import { RolesService } from 'src/server/roles/roles.service';
 import { createUserDto } from './dto/create-user.dto';
 import { User } from './users.model';
 
@@ -9,7 +9,7 @@ export class UsersService {
     
     constructor(@InjectModel(User) private userRepository: typeof User, private roleService:RolesService) {}
 
-    async getAllUsers(){
+    async getAllUsers() {
         const users = await this.userRepository.findAll({include:{all:true}});
         return users;
     }

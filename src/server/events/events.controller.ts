@@ -3,6 +3,7 @@ import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateEventsDto } from './dto/create-events.dto';
 import { EventsService } from './events.service';
 import { Event } from './events.model';
+import { Json } from 'sequelize/types/utils';
 
 @ApiTags('События')
 @Controller('events')
@@ -36,14 +37,14 @@ export class EventsController {
     }
 
     @ApiOperation({summary: 'Удаление события'})
-    @ApiResponse({status:200, type:[Event]})
+    @ApiResponse({status:200, description: '"message": "Успешно удалено"'})
     @Delete('/:id')
     delete(@Param('id') id: string){
         return this.eventsService.deleteEvent(id);
     }
 
     @ApiOperation({summary: 'Редактирование'})
-    @ApiResponse({status:200, type:[Event]})
+    @ApiResponse({status:200, type: Event})
     @Put('/:id')
     update(@Param('id') id: string, @Body() dto: CreateEventsDto){
         return this.eventsService.updateEvent(id,dto);

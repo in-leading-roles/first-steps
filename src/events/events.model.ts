@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import {Column, DataType, Model, Table } from "sequelize-typescript";
+import { Column, DataType, Model, Table } from "sequelize-typescript";
 
 interface EventCreationAttrs{
     title: string;
@@ -9,7 +9,7 @@ interface EventCreationAttrs{
 }
 
 @Table({tableName: 'events'})
-export class Events extends Model<Events, EventCreationAttrs>{
+export class Event extends Model<Event, EventCreationAttrs>{
     
     @ApiProperty({example: '1', description: 'Уникальный идентификатор'})
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
@@ -19,15 +19,15 @@ export class Events extends Model<Events, EventCreationAttrs>{
     @Column({type: DataType.STRING, unique: true, allowNull: false})
     title: string;
     
-    @ApiProperty({example: 'Обыкновенное описание ивента', description: 'Содержимое ивента'})
+    @ApiProperty({example: 'Обыкновенное описание события', description: 'Содержимое события'})
     @Column({type: DataType.STRING, allowNull: false})
     content:string;
 
-    @ApiProperty({example: '2022-01-01', description: 'Дата начала ивента'})
+    @ApiProperty({example: '2022-01-01 01:02:03', description: 'Дата начала события'})
     @Column({type: DataType.DATE, allowNull: false})
     startDate: Date;
 
-    @ApiProperty({example: '2022-01-02', description: 'Дата окончания ивента'})
+    @ApiProperty({example: '2022-01-02 01:02:03', description: 'Дата окончания события'})
     @Column({type: DataType.DATE, allowNull: false})
     endDate: Date;
 

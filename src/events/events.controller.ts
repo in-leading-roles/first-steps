@@ -2,28 +2,33 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateEventsDto } from './dto/create-events.dto';
 import { EventsService } from './events.service';
+import { Event } from './events.model';
 
-@ApiTags('Ивенты')
+@ApiTags('События')
 @Controller('events')
 export class EventsController {
     constructor(private eventsService: EventsService){}
 
-    @ApiOperation({summary: 'Получение всех ивентов'})
+    @ApiOperation({summary: 'Получение всех событий'})
     @ApiResponse({status:200, type:[Event]})
     @Get()
     getAll(){
         return this.eventsService.getAllEvents();
     }
 
-    @ApiOperation({summary: 'Получение ивента по значению'})
-    @ApiResponse({status:200, type:[Event]})
-    @Get('/:value')
-    //@ApiParam({})
-    getByValue(@Param('value') value: string){
-        return this.eventsService.getEventByValue(value);
+    @ApiOperation({summary: 'Получение событий по значению'})
+    @ApiResponse({status:200, type:Event})
+    @Get('/:id')
+    @ApiParam({name: 'id', 
+    required: true, 
+    description: 'id события',
+    example: '1',
+    type: 'number'})
+    getByValue(@Param('id') id: string){
+        return this.eventsService.getEventByValue(id);
     }
 
-    @ApiOperation({summary: 'Создание ивента'})
+    @ApiOperation({summary: 'Создание события'})
     @ApiResponse({status:200, type: Event})
     @Post()
     create(@Body() dto: CreateEventsDto){

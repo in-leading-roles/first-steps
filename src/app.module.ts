@@ -1,13 +1,13 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { SequelizeModule } from "@nestjs/sequelize";
-import { User } from "./users/users.model";
-import { UsersModule } from './users/users.module';
-import { RolesModule } from './roles/roles.module';
-import { Role } from "./roles/roles.model";
-import { UserRoles } from "./roles/user-roles.model";
-import { EventsModule } from './events/events.module';
-import { Event } from "./events/events.model";
+import { User } from "./server/users/users.model";
+import { UsersModule } from './server/users/users.module';
+import { RolesModule } from "./server/roles/roles.module";
+import { Role } from "./server/roles/roles.model";
+import { UserRoles } from "./server/roles/user-roles.model";
+import { EventsModule } from './server/events/events.module';
+import { Event } from "./server/events/events.model";
 
 @Module({
     imports: [

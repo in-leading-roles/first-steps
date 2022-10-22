@@ -22,4 +22,9 @@ export class EventsService {
         return events;
     }
 
+    async deleteEvent(id:string){
+        await this.eventsRepository.destroy({where: {id}});
+        return {message: 'Успешно удалено'}
+    }
+
 }

@@ -15,4 +15,11 @@ export class EventsService {
     async getEventByValue(value:string){
         const event = await this.eventsRepository.findOne({where: {value}});
         return event;
-}}
+    }
+
+    async getAllEvents(){
+        const events = await this.eventsRepository.findAll({include:{all:true}});
+        return events;
+    }
+
+}

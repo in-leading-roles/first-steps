@@ -8,11 +8,11 @@ export class EventsService {
     constructor (@InjectModel(Events) private eventsRepository: typeof Events) {}
 
     async createEvent(dto: CreateEventsDto){
-        const role = await this.eventsRepository.create(dto);
-        return role;
+        const event = await this.eventsRepository.create(dto);
+        return event;
 }
 
-    async getRoleByValue(value:string){
-        const role = await this.eventsRepository.findOne({where: {value}});
-        return role;
+    async getEventByValue(value:string){
+        const event = await this.eventsRepository.findOne({where: {value}});
+        return event;
 }}

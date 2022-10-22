@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateEventsDto } from './dto/create-events.dto';
 import { EventsService } from './events.service';
@@ -40,5 +40,12 @@ export class EventsController {
     @Delete('/:id')
     delete(@Param('id') id: string){
         return this.eventsService.deleteEvent(id);
+    }
+
+    @ApiOperation({summary: 'Редактирование'})
+    @ApiResponse({status:200, type:[Event]})
+    @Put('/:id')
+    update(@Param('id') id: string, @Body() dto: CreateEventsDto){
+        return this.eventsService.updateEvent(id,dto);
     }
 }

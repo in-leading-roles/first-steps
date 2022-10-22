@@ -27,4 +27,10 @@ export class EventsService {
         return {message: 'Успешно удалено'}
     }
 
+    async updateEvent(id:string,dto: CreateEventsDto){
+        const event = await this.eventsRepository.update(
+        (dto), {where: {id} })
+        return this.getEventByValue(id)
+    }
+
 }

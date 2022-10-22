@@ -35,9 +35,11 @@ export class EventsController {
     create(@Body() dto: CreateEventsDto){
         return this.eventsService.createEvent(dto);
     }
-
+    
     @ApiOperation({summary: 'Удаление события'})
-    @ApiResponse({status:200, description: '"message": "Успешно удалено"'})
+    @ApiResponse({status:200, description:  JSON.stringify({
+        destroyedRows:1
+    })})
     @Delete('/:id')
     delete(@Param('id') id: string){
         return this.eventsService.deleteEvent(id);

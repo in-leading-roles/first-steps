@@ -23,8 +23,8 @@ export class EventsService {
     }
 
     async deleteEvent(id:string){
-        await this.eventsRepository.destroy({where: {id}});
-        return {message: 'Успешно удалено'}
+        const result = await this.eventsRepository.destroy({where: {id}});
+        return {destroyedRows:result};
     }
 
     async updateEvent(id:string,dto: CreateEventsDto){

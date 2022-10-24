@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { where } from 'sequelize';
 import { RolesService } from 'src/server/roles/roles.service';
 import { createUserDto } from './dto/create-user.dto';
 import { User } from './users.model';
@@ -20,5 +21,9 @@ export class UsersService {
         await user.$set('roles', [role.id]);
         user.roles = [role]; 
         return user;
+    }
+
+    async findOne(login: string) {
+        return this.userRepository.findOne({where: {login}});
     }
 }

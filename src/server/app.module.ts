@@ -9,6 +9,7 @@ import { UserRoles } from "./roles/user-roles.model";
 import { EventsModule } from './events/events.module';
 import { Event } from "./events/events.model";
 import { AuthModule } from "./auth/auth.module";
+import { TestModule } from './test/test.module';
 
 @Module({
     imports: [
@@ -28,7 +29,8 @@ import { AuthModule } from "./auth/auth.module";
         UsersModule,
         RolesModule,
         EventsModule,
-        AuthModule
+        AuthModule,
+        TestModule
     ],
 })
 export class AppModule{}

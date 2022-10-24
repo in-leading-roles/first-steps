@@ -7,13 +7,8 @@ import bcrypt from 'bcrypt';
 export class AuthService {
   constructor(private usersService: UsersService) {}
 
-  private async validateUser(userDto: createUserDto) {
+  async validateUser(userDto: createUserDto) {
     const user = await this.usersService.findOne(userDto.login);
-    if (user == null) {
-      throw new UnauthorizedException({
-        message: 'Некоректная почта или пароль',
-      });
-    }
     const passwordEquals = await bcrypt.compare(
       userDto.password,
       user.password,
@@ -21,8 +16,6 @@ export class AuthService {
     if (user && passwordEquals) {
       return user;
     }
-    throw new UnauthorizedException({
-      message: 'Некоректная почта или пароль',
-    });
+    return null;
   }
 }

@@ -8,6 +8,7 @@ import { Role } from "./server/roles/roles.model";
 import { UserRoles } from "./server/roles/user-roles.model";
 import { EventsModule } from './server/events/events.module';
 import { Event } from "./server/events/events.model";
+import { AuthModule } from "./server/auth/auth.module";
 
 @Module({
     imports: [
@@ -27,6 +28,7 @@ import { Event } from "./server/events/events.model";
         UsersModule,
         RolesModule,
         EventsModule,
+        AuthModule,
     ],
 })
 export class AppModule{}

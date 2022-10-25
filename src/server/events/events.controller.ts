@@ -26,7 +26,7 @@ export class EventsController {
     example: '1',
     type: 'number'})
     getByValue(@Param('id') id: string){
-        return this.eventsService.getEventByValue(id);
+        return this.eventsService.getEventById(id);
     }
 
     @ApiOperation({summary: 'Создание события'})

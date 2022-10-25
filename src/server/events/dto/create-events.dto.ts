@@ -12,4 +12,7 @@ export class CreateEventsDto{
 
     @ApiProperty({example: '2022-01-02 01:02:03', description: 'Дата окончания события'})
     readonly endDate: Date;
+
+    @ApiProperty({example: '1', description: 'ID пользователя'})
+    readonly UserId: string;
 }

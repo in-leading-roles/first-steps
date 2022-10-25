@@ -14,6 +14,11 @@ export class UsersService {
         return users;
     }
 
+    async getUserById(id: string) {
+        const user = await this.userRepository.findOne({where: {id}});
+        return user;
+    }
+
     async createUser(dto: createUserDto){
         const user = await this.userRepository.create(dto);
         const role = await this.roleService.getRoleByValue("USER");

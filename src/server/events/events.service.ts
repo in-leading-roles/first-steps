@@ -10,13 +10,13 @@ export class EventsService {
 
     async createEvent(dto: CreateEventsDto){
         const event = await this.eventsRepository.create(dto);
-        const user = await this.userService.getRoleByValue("USER");
+        const user = await this.userService.getUserById(dto.UserId);
         await event.$set('users', [user.id]);
         event.users = [user]; 
         return event;
 }
 
-    async getEventByValue(id:string){
+    async getEventById(id:string){
         const event = await this.eventsRepository.findOne({where: {id}});
         return event;
     }
@@ -34,7 +34,7 @@ export class EventsService {
     async updateEvent(id:string,dto: CreateEventsDto){
         const event = await this.eventsRepository.update(
         (dto), {where: {id} })
-        return this.getEventByValue(id)
+        return this.getEventById(id)
     }
 
 }

@@ -15,5 +15,6 @@ import { UserEvents } from '../events/users-events.model';
   ],
   controllers: [UsersController],
   providers: [UsersService],
+  exports: [UsersService]
 })
 export class UsersModule {}

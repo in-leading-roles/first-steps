@@ -8,6 +8,7 @@ import { Role } from "./roles/roles.model";
 import { UserRoles } from "./roles/user-roles.model";
 import { EventsModule } from './events/events.module';
 import { Event } from "./events/events.model";
+import { UserEvents } from "./events/users-events.model";
 
 @Module({
     imports: [
@@ -21,7 +22,7 @@ import { Event } from "./events/events.model";
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, Role, UserRoles, Event],
+            models: [User, Role, UserRoles, Event, UserEvents],
             autoLoadModels: true,
           }),
         UsersModule,

@@ -1,14 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { UsersService } from '../users/users.service';
 import { CreateEventsDto } from './dto/create-events.dto';
 import { Event } from './events.model';
 
 @Injectable()
 export class EventsService {    
-    constructor (@InjectModel(Event) private eventsRepository: typeof Event) {}
+    constructor (@InjectModel(Event) private eventsRepository: typeof Event, private userService:UsersService) {}
 
     async createEvent(dto: CreateEventsDto){
         const event = await this.eventsRepository.create(dto);
+        const user = await this.userService.getRoleByValue("USER");
+        await event.$set('users', [user.id]);
+        event.users = [user]; 
         return event;
 }
 

@@ -9,7 +9,7 @@ export class UserEvents extends Model<UserEvents>{
 
     @ForeignKey(()=>Event)
     @Column({type: DataType.INTEGER})
-    roleId: number;
+    eventId: number;
 
     @ForeignKey(()=>User)
     @Column({type: DataType.INTEGER})

@@ -10,15 +10,11 @@ export class EventsService {
 
     async createEvent(dto: CreateEventsDto){
         const event = await this.eventsRepository.create(dto);
-        console.log(dto.UserId)
-        const user = await this.userService.getUserById(dto.UserId);
-        await event.$set('users', [user.id]);
-        event.users = [user]; 
         return event;
 }
 
     async getEventById(id:string){
-        const event = await this.eventsRepository.findOne({where: {id}});
+        const event = await this.eventsRepository.findOne({where: {id}, include:{all:true}});
         return event;
     }
 

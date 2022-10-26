@@ -30,6 +30,6 @@ import { AuthModule } from './auth/auth.module';
         RolesModule,
         EventsModule,
         AuthModule,
-    ],
+    ]
 })
 export class AppModule{}

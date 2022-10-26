@@ -51,4 +51,11 @@ export class EventsController {
     update(@Param('id') id: string, @Body() dto: CreateEventsDto){
         return this.eventsService.updateEvent(id,dto);
     }
+
+    @ApiOperation({summary: 'Добавление пользователя в событие'})
+    @ApiResponse({status:200, type: Event})
+    @Put('/userevent/:userId/:eventId')
+    addUser(@Param('userId') userId: string, @Param('eventId') eventId: string){
+        return this.eventsService.addUserToEvent(userId, eventId);
+    }
 }

@@ -15,11 +15,4 @@ export class UsersController {
   getAll() {
     return this.userService.getAllUsers();
   }
-
-  @ApiOperation({ summary: 'Создание пользователя' })
-  @ApiResponse({ status: 200, type: User })
-  @Post()
-  create(@Body() userDto: createUserDto) {
-    return this.userService.createUser(userDto);
-  }
 }

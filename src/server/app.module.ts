@@ -8,12 +8,12 @@ import { Role } from "./roles/roles.model";
 import { UserRoles } from "./roles/user-roles.model";
 import { EventsModule } from './events/events.module';
 import { Event } from "./events/events.model";
-import { AuthModule } from "./auth/auth.module";
-
+import { AuthModule } from './auth/auth.module';
 
 @Module({
     imports: [
         ConfigModule.forRoot({
+            isGlobal: true,
             envFilePath: `.${process.env.NODE_ENV}.env`
         }),
         SequelizeModule.forRoot({
@@ -30,6 +30,6 @@ import { AuthModule } from "./auth/auth.module";
         RolesModule,
         EventsModule,
         AuthModule,
-    ],
+    ]
 })
 export class AppModule{}

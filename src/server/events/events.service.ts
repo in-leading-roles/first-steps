@@ -42,7 +42,7 @@ export class EventsService {
         const event = await this.getEventById(eventId);
         const user = await this.userService.getUserById(userId);
         console.log(user.id)
-        await event.$set('users', [user.id]);
+        await event.$add('users', [user.id]);
         event.users = [user];
         return event;
     }

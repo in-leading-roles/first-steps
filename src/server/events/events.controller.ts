@@ -40,6 +40,7 @@ export class EventsController {
     @ApiResponse({status:200, description:  JSON.stringify({
         destroyedRows:1
     })})
+
     @Delete('/:id')
     delete(@Param('id') id: string){
         return this.eventsService.deleteEvent(id);

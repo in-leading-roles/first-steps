@@ -8,8 +8,7 @@ import { User } from '../users/users.model';
 @Injectable()
 export class AuthService {
     constructor(private usersService: UsersService,
-        private jwtService: JwtService,
-        private userService: UsersService) {}
+        private jwtService: JwtService) {}
     
       async validateUser(userDto: createUserDto) {
         const user = await this.usersService.findOne(userDto.login);
@@ -29,11 +28,11 @@ export class AuthService {
       }
 
       async registration(userDto: createUserDto){
-        const candidate = await this.userService.findOne(userDto.login);
+        const candidate = await this.usersService.findOne(userDto.login);
         if(candidate){
           return null;
         }
-        const user = await this.userService.createUser(userDto);
+        const user = await this.usersService.createUser(userDto);
         return user;
     }
     

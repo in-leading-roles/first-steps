@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { Global, Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { SequelizeModule } from "@nestjs/sequelize";
 import { User } from "./server/users/users.model";
@@ -10,10 +10,11 @@ import { EventsModule } from './server/events/events.module';
 import { Event } from "./server/events/events.model";
 import { AuthModule } from "./server/auth/auth.module";
 
+@Global()
 @Module({
     imports: [
         ConfigModule.forRoot({
-            envFilePath: `.${process.env.NODE_ENV}.env`
+            envFilePath: `.${process.env.NODE_ENV}.env`,
         }),
         SequelizeModule.forRoot({
             dialect: 'postgres',
@@ -29,6 +30,6 @@ import { AuthModule } from "./server/auth/auth.module";
         RolesModule,
         EventsModule,
         AuthModule,
-    ],
+    ]
 })
 export class AppModule{}

@@ -13,6 +13,7 @@ import { AuthModule } from './auth/auth.module';
 @Module({
     imports: [
         ConfigModule.forRoot({
+            isGlobal: true,
             envFilePath: `.${process.env.NODE_ENV}.env`
         }),
         SequelizeModule.forRoot({

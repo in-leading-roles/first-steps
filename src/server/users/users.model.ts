@@ -20,11 +20,11 @@ export class User extends Model<User, UserCreationAttrs>{
     login:string;
     
     @ApiProperty({example: 'user@mail.ru', description: 'Почтовый адрес'})
-    @Column({type: DataType.STRING, unique: true, allowNull:false})
+    @Column({type: DataType.STRING, unique: false, allowNull:true})
     email:string;
 
     @ApiProperty({example: '123456789', description: 'Пароль пользователя'})
-    @Column({type: DataType.STRING, allowNull:false})
+    @Column({type: DataType.STRING, allowNull:true})
     password:string;
 
     @BelongsToMany(()=>Role, ()=>UserRoles)

@@ -9,9 +9,15 @@ import { LocalAuthGuard } from './local-auth.guard';
 export class AuthController {
     constructor(private authService: AuthService) {}
 
-    @ApiOperation({summary: 'Получение всех событий'})
-    @Post()
+    @ApiOperation({summary: 'Вход в аккаунт'})
+    @Post('/login')
     async login(@Body() userDto: createUserDto) {
       return this.authService.login(userDto);
+    }
+    
+    @ApiOperation({summary: 'Регистрация пользователя'})
+    @Post('/registration')
+    registration(@Body() userDto: createUserDto){
+        return this.authService.registration(userDto);
     }
 }

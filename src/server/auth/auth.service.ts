@@ -4,7 +4,6 @@ import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt'
 import { JwtService } from '@nestjs/jwt';
 import { User } from '../users/users.model';
-import { json } from 'sequelize';
 
 @Injectable()
 export class AuthService {
@@ -34,8 +33,7 @@ export class AuthService {
         if(candidate){
           return null;
         }
-        const hashPassword = await bcrypt.hash(userDto.password, 5);
-        const user = await this.userService.createUser({...userDto, password:hashPassword});
+        const user = await this.userService.createUser(userDto);
         return user;
     }
     

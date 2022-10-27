@@ -36,4 +36,11 @@ export class UsersController {
     create(@Body() userDto: createUserDto ){
         return this.userService.createUser(userDto);
     }
+
+    @ApiOperation({summary: 'Получение событий пользователя'})
+    @ApiResponse({status:200, type:User})
+    @Get('getevents/:id')
+    getEvents(@Param('id') id: string){
+        return this.userService.getUserEvents(id)
+    }
 }

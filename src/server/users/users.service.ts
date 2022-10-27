@@ -26,4 +26,9 @@ export class UsersService {
         user.roles = [role]; 
         return user;
     }
+
+    async getUserEvents(id: string){
+        const user = await this.userRepository.findOne({where: {id}, include:{all:true}});
+        return user.events
+    }
 }

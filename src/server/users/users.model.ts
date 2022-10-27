@@ -33,5 +33,5 @@ export class User extends Model<User, UserCreationAttrs>{
     roles:Role[]
 
     @BelongsToMany(()=>Event, ()=>UserEvents)
-    users: Event[]
+    events: Event[]
 }

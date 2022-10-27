@@ -38,7 +38,7 @@ export class UsersController {
     }
 
     @ApiOperation({summary: 'Получение событий пользователя'})
-    @ApiResponse({status:200, type:User})
+    @ApiResponse({status:200, type:Event})
     @Get('getevents/:id')
     getEvents(@Param('id') id: string){
         return this.userService.getUserEvents(id)

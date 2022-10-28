@@ -20,7 +20,7 @@ export class UsersService {
         const password = passwordGenerator.generatePassword({length:10, obscureSymbols: false});
         const hashPassword = await bcrypt.hash(password, 5);
         const user = await this.userRepository.create({...dto, password:hashPassword});
-        const role = await this.roleService.getRoleByValue("USER");
+        const role = await this.roleService.getRoleByValue("HR");
         await user.$set('roles', [role.id]);
         user.roles = [role];
         user.password = password;
@@ -29,5 +29,10 @@ export class UsersService {
 
     async findOne(login: string) {
         return this.userRepository.findOne({where: {login}});
+    }
+
+    async getUserRoles(id: string) {
+        const user = await this.userRepository.findOne({where: {id}, include:{all:true}});
+        return user.roles;
     }
 }

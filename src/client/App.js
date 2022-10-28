@@ -1,15 +1,8 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const React = require("react");
-const react_dom_1 = require("react-dom");
-const App = () => {
-    const [text, SetText] = React.useState();
-    React.useEffect(() => {
-        fetch('/users')
-            .then(res => res.json())
-            .then(res => SetText(res[0].login));
-    }, []);
-    return React.createElement("h1", null, text);
+exports.__esModule = true;
+var React = require("react");
+var react_dom_1 = require("react-dom");
+var App = function () {
+    return <h1>adafsdsada</h1>;
 };
-(0, react_dom_1.render)(React.createElement(App, null), document.getElementById('app'));
-//# sourceMappingURL=App.js.map
+(0, react_dom_1.render)(<App />, document.getElementById('app'));

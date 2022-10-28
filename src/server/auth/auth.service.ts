@@ -4,12 +4,14 @@ import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '../users/users.model';
+import { RolesService } from '../roles/roles.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
+    private userSerive: UsersService
   ) {}
 
   async validateUser(userDto: createUserDto) {
@@ -39,7 +41,11 @@ export class AuthService {
   }
 
   private async generateToken(user: User) {
-    const payload = { email: user.email, id: user.id, roles: user.roles };
+    const roles = await Promise.all([this.userSerive.getUserRoles(String(user.id))]);
+    const rolesValues = roles[0].map(role => {
+      return role.value;
+    });
+    const payload = { id: user.id, roles: rolesValues };
     return {
       token: this.jwtService.sign(payload),
     };

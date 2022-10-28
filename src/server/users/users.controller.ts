@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Roles } from '../auth/roles-auth/roles.decorator';
 import { createUserDto } from './dto/create-user.dto';
 import { User } from './users.model';
 import { UsersService } from './users.service';

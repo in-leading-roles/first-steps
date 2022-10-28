@@ -13,11 +13,6 @@ module.exports = {
         unique: true, 
         allowNull:false
       },
-      email: {
-        type: Sequelize.DataTypes.STRING, 
-        unique: false, 
-        allowNull:true
-      },
       password: {
         type: Sequelize.DataTypes.STRING, 
         allowNull:false

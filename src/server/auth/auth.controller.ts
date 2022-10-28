@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { createUserDto } from '../users/dto/create-user.dto';
 import { AuthService } from './auth.service';
+import { Roles } from './roles.decorator';
 import { SkipAuth } from './skip-auth.decorator';
 
 @ApiTags('Авторизация')
@@ -16,6 +17,7 @@ export class AuthController {
       return this.authService.login(userDto);
     }
     
+    @Roles("HR")
     @SkipAuth()
     @ApiOperation({summary: 'Регистрация пользователя'})
     @Post('/registration')

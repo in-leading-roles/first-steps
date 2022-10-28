@@ -7,7 +7,6 @@ import { UsersModule } from '../users/users.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
-import { LocalStrategy } from './local.strategy';
 import { RolesModule } from '../roles/roles.module';
 import { RolesGuard } from './roles.guard';
 require('dotenv').config();
@@ -23,7 +22,6 @@ require('dotenv').config();
   ],
   providers: [
     AuthService,
-    LocalStrategy,
     JwtStrategy,
     {
       provide: APP_GUARD,

@@ -8,40 +8,48 @@ import { UsersService } from './users.service';
 
 @ApiTags('Пользователи')
 @Controller('users')
-export class UsersController { 
-    constructor(private userService: UsersService){}
+export class UsersController {
+  constructor(private userService: UsersService) {}
 
-    @ApiOperation({summary: 'Получение всех пользователей'})
-    @ApiResponse({status:200, type:[User]})
-    @Get()
-    getAll(){
-        return this.userService.getAllUsers();
-    }
+  @ApiOperation({ summary: 'Получение всех пользователей' })
+  @ApiResponse({ status: 200, type: [User] })
+  @Get()
+  getAll() {
+    return this.userService.getAllUsers();
+  }
 
-    @ApiOperation({summary: 'Получение пользователя по значению'})
-    @ApiResponse({status:200, type:[User]})
-    @Get('/:id')
-    @ApiParam({name: 'id', 
-    required: true, 
+  @ApiOperation({ summary: 'Получение пользователя по значению' })
+  @ApiResponse({ status: 200, type: [User] })
+  @Get('/:id')
+  @ApiParam({
+    name: 'id',
+    required: true,
     description: 'Login пользователя',
     example: 'USER',
-    type: 'string'
-    })
-    getById(@Param('id') id: string){
-        return this.userService.getUserById(id);
-    }
+    type: 'string',
+  })
+  getById(@Param('id') id: string) {
+    return this.userService.getUserById(id);
+  }
 
-    @ApiOperation({summary: 'Создание пользователя'})
-    @ApiResponse({status:200, type:User})
-    @Post()
-    create(@Body() userDto: createUserDto ){
-        return this.userService.createUser(userDto);
-    }
+  @ApiOperation({ summary: 'Создание пользователя' })
+  @ApiResponse({ status: 200, type: User })
+  @Post()
+  create(@Body() userDto: createUserDto) {
+    return this.userService.createUser(userDto);
+  }
 
-    @ApiOperation({summary: 'Получение событий пользователя'})
-    @ApiResponse({status:200, type:Event})
-    @Get('getevents/:id')
-    getEvents(@Param('id') id: string){
-        return this.userService.getUserEvents(id)
-    }
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'id пользователя',
+    example: 'id',
+    type: 'string',
+  })
+  @ApiOperation({ summary: 'Получение событий пользователя' })
+  @ApiResponse({ status: 200, type: Event })
+  @Get('getevents/:id')
+  getEvents(@Param('id') id: string) {
+    return this.userService.getUserEvents(id);
+  }
 }

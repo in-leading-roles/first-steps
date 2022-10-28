@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateEventsDto } from './dto/create-events.dto';
 import { EventsService } from './events.service';
@@ -9,26 +17,28 @@ import { Roles } from '../auth/roles-auth/roles.decorator';
 @ApiTags('События')
 @Controller('events')
 export class EventsController {
-    constructor(private eventsService: EventsService){}
+  constructor(private eventsService: EventsService) {}
 
-    @ApiOperation({summary: 'Получение всех событий'})
-    @ApiResponse({status:200, type:[Event]})
-    @Get()
-    getAll(){
-        return this.eventsService.getAllEvents();
-    }
+  @ApiOperation({ summary: 'Получение всех событий' })
+  @ApiResponse({ status: 200, type: [Event] })
+  @Get()
+  getAll() {
+    return this.eventsService.getAllEvents();
+  }
 
-    @ApiOperation({summary: 'Получение событий по значению'})
-    @ApiResponse({status:200, type:Event})
-    @Get('/:id')
-    @ApiParam({name: 'id', 
-    required: true, 
+  @ApiOperation({ summary: 'Получение событий по значению' })
+  @ApiResponse({ status: 200, type: Event })
+  @Get('/:id')
+  @ApiParam({
+    name: 'id',
+    required: true,
     description: 'id события',
     example: '1',
-    type: 'number'})
-    getByValue(@Param('id') id: string){
-        return this.eventsService.getEventByValue(id);
-    }
+    type: 'number',
+  })
+  getByValue(@Param('id') id: string) {
+    return this.eventsService.getEventById(id);
+  }
 
     @Roles("HR")
     @ApiOperation({summary: 'Создание события'})
@@ -54,5 +64,27 @@ export class EventsController {
     @Put('/:id')
     update(@Param('id') id: string, @Body() dto: CreateEventsDto){
         return this.eventsService.updateEvent(id,dto);
+    }
+    
+    @ApiParam({
+        name: 'userId',
+        required: true,
+        description: 'id пользователя',
+        example: 'id',
+        type: 'string',
+      })
+      @ApiParam({
+        name: 'eventId',
+        required: true,
+        description: 'id события',
+        example: 'id',
+        type: 'string',
+      })
+    @Roles("HR")
+    @ApiOperation({ summary: 'Добавление пользователя в событие' })
+    @ApiResponse({ status: 200, type: Event })
+    @Put('/userevent/:userId/:eventId')
+    addUser(@Param('userId') userId: string, @Param('eventId') eventId: string) {
+      return this.eventsService.addUserToEvent(userId, eventId);
     }
 }

@@ -1,5 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
+import { User } from "../users/users.model";
+import { UserEvents } from "./users-events.model";
 
 interface EventCreationAttrs{
     title: string;
@@ -30,5 +32,8 @@ export class Event extends Model<Event, EventCreationAttrs>{
     @ApiProperty({example: '2022-01-02 01:02:03', description: 'Дата окончания события'})
     @Column({type: DataType.DATE, allowNull: false})
     endDate: Date;
+
+    @BelongsToMany(()=>User, ()=>UserEvents)
+    users: User[]
 
 }

@@ -16,6 +16,11 @@ export class UsersService {
         return users;
     }
 
+    async getUserById(id: string) {
+        const user = await this.userRepository.findOne({where: {id}, include:{all:true}});
+        return user;
+    }
+
     async createUser(dto: createUserDto){
         const password = passwordGenerator.generatePassword({length:10, obscureSymbols: false});
         const hashPassword = await bcrypt.hash(password, 5);
@@ -27,6 +32,11 @@ export class UsersService {
         return user;
     }
 
+    async getUserEvents(id: string){
+        const user = await this.userRepository.findOne({where: {id}, include:{all:true}});
+        return user.events
+    }
+    
     async findOne(login: string) {
         return this.userRepository.findOne({where: {login}});
     }

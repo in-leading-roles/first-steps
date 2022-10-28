@@ -7,7 +7,6 @@ import { UserEvents } from "../events/users-events.model";
 
 interface UserCreationAttrs {
     login: string;
-    email: string;
     password: string;
 }
 
@@ -20,13 +19,9 @@ export class User extends Model<User, UserCreationAttrs>{
     @ApiProperty({example: 'UserName', description: 'Имя пользователя'})
     @Column({type: DataType.STRING, unique: true, allowNull:false})
     login:string;
-    
-    @ApiProperty({example: 'user@mail.ru', description: 'Почтовый адрес'})
-    @Column({type: DataType.STRING, unique: true, allowNull:false})
-    email:string;
 
     @ApiProperty({example: '123456789', description: 'Пароль пользователя'})
-    @Column({type: DataType.STRING, allowNull:false})
+    @Column({type: DataType.STRING, allowNull:true})
     password:string;
 
     @BelongsToMany(()=>Role, ()=>UserRoles)

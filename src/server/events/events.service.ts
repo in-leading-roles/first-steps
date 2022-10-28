@@ -11,7 +11,7 @@ export class EventsService {
     async createEvent(dto: CreateEventsDto){
         const event = await this.eventsRepository.create(dto);
         return event;
-}
+    }
 
     async getEventById(id:string){
         const event = await this.eventsRepository.findOne({where: {id}, include:{all:true}});

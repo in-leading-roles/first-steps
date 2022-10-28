@@ -57,6 +57,7 @@ export class EventsController {
     @ApiResponse({status:200, type: Event})
     @Put('/userevent/:userId/:eventId')
     addUser(@Param('userId') userId: string, @Param('eventId') eventId: string){
+        console.log(userId, eventId);
         return this.eventsService.addUserToEvent(userId, eventId);
     }
 }

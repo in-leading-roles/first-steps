@@ -41,10 +41,11 @@ export class AuthService {
   }
 
   private async generateToken(user: User) {
-    let a = [this.userSerive.getUserRoles(String(user.id))];
-    const roles = await Promise.all(a);
-    console.log(roles[0][0]['value']);
-    const payload = { id: user.id, roles: roles[0][0]['value'] };
+    const roles = await Promise.all([this.userSerive.getUserRoles(String(user.id))]);
+    const rolesValues = roles[0].map(role => {
+      return role.value;
+    });
+    const payload = { id: user.id, roles: rolesValues };
     return {
       token: this.jwtService.sign(payload),
     };

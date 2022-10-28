@@ -34,7 +34,7 @@ export class UsersService {
 
     async getUserEvents(id: string){
         const user = await this.userRepository.findOne({where: {id}, include:{all:true}});
-        return user.events
+        return user.events;
     }
     
     async findOne(login: string) {

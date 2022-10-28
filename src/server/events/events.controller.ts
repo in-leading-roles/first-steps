@@ -4,6 +4,7 @@ import { CreateEventsDto } from './dto/create-events.dto';
 import { EventsService } from './events.service';
 import { Event } from './events.model';
 import { Json } from 'sequelize/types/utils';
+import { Roles } from '../auth/roles.decorator';
 
 @ApiTags('События')
 @Controller('events')
@@ -29,6 +30,7 @@ export class EventsController {
         return this.eventsService.getEventByValue(id);
     }
 
+    @Roles("HR")
     @ApiOperation({summary: 'Создание события'})
     @ApiResponse({status:200, type: Event})
     @Post()
@@ -36,6 +38,7 @@ export class EventsController {
         return this.eventsService.createEvent(dto);
     }
     
+    @Roles("HR")
     @ApiOperation({summary: 'Удаление события'})
     @ApiResponse({status:200, description:  JSON.stringify({
         destroyedRows:1
@@ -45,6 +48,7 @@ export class EventsController {
         return this.eventsService.deleteEvent(id);
     }
 
+    @Roles("HR")
     @ApiOperation({summary: 'Редактирование'})
     @ApiResponse({status:200, type: Event})
     @Put('/:id')

@@ -8,7 +8,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt-auth/jwt.strategy';
 import { RolesModule } from '../roles/roles.module';
-import { RolesGuard } from './roles.guard';
+import { RolesGuard } from './roles-auth/roles.guard';
 require('dotenv').config();
 
 @Module({

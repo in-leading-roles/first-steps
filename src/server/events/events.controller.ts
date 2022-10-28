@@ -4,7 +4,7 @@ import { CreateEventsDto } from './dto/create-events.dto';
 import { EventsService } from './events.service';
 import { Event } from './events.model';
 import { Json } from 'sequelize/types/utils';
-import { Roles } from '../auth/roles.decorator';
+import { Roles } from '../auth/roles-auth/roles.decorator';
 
 @ApiTags('События')
 @Controller('events')

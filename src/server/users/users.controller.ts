@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { GetUserEventsResponse } from 'src/common/GetUserEventsResponse';
 import { Event } from '../events/events.model';
 import { createUserDto } from './dto/create-user.dto';
 import { User } from './users.model';
@@ -41,7 +42,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Получение событий пользователя' })
   @ApiResponse({ status: 200, type: Event })
   @Get('getevents/:id')
-  getEvents(@Param('id') id: string) {
+  getEvents(@Param('id') id: string):GetUserEventsResponse {
     return this.userService.getUserEvents(id);
   }
 }

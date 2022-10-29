@@ -40,7 +40,6 @@ export class EventsController {
     return this.eventsService.getEventById(id);
   }
 
-    @Roles("HR")
     @ApiOperation({summary: 'Создание события'})
     @ApiResponse({status:200, type: Event})
     @Post()
@@ -48,7 +47,6 @@ export class EventsController {
         return this.eventsService.createEvent(dto);
     }
     
-    @Roles("HR")
     @ApiOperation({summary: 'Удаление события'})
     @ApiResponse({status:200, description:  JSON.stringify({
         destroyedRows:1
@@ -58,7 +56,6 @@ export class EventsController {
         return this.eventsService.deleteEvent(id);
     }
 
-    @Roles("HR")
     @ApiOperation({summary: 'Редактирование'})
     @ApiResponse({status:200, type: Event})
     @Put('/:id')
@@ -80,7 +77,6 @@ export class EventsController {
         example: 'id',
         type: 'string',
       })
-    @Roles("HR")
     @ApiOperation({ summary: 'Добавление пользователя в событие' })
     @ApiResponse({ status: 200, type: Event })
     @Put('/userevent/:userId/:eventId')

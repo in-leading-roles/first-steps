@@ -3,7 +3,7 @@ import * as React from 'react';
 
 interface IAuthContext {
     isAuth:Boolean | null;
-    setIsAuth:React.Dispatch<React.SetStateAction<boolean| null>>;
+    setIsAuth:React.Dispatch<React.SetStateAction<boolean | null>>;
     isLoading:Boolean| null;
   }
 export const AuthContext = React.createContext<IAuthContext>({

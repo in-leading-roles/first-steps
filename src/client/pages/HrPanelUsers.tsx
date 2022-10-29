@@ -20,7 +20,7 @@ const HrPanelUsers = () => {
   return (
     <div>
       <HrPanelNavbar />
-      <Link to="/hr/user/add">Добавить пользоавтеля</Link>
+      <Link to="/hr/users/add">Добавить пользоавтеля</Link>
       {users.map((user, index) => (
         <div key={user.id}>
           <h1>{user.login}</h1>

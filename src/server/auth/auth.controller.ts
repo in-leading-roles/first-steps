@@ -18,7 +18,7 @@ export class AuthController {
       return this.authService.login(userDto);
     }
     
-    // @Roles("HR")
+    /*@Roles("HR")*/
     @SkipAuth()
     @ApiOperation({summary: 'Регистрация пользователя'})
     @Post('/registration')

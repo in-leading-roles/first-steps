@@ -27,7 +27,7 @@ const AppRouter = () => {
         <Route path="/hr/users/add" element={<HrPanelAddUser />} />
         <Route path="/hr/events" element={<HrPanelAddUser />} />
       </Routes>
-      <Navigate to="/hr/users" replace={true} />
+      {/* <Navigate to="/hr/users" replace={true} /> */}
     </div>
     :
     <div>

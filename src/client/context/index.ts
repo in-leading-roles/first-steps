@@ -1,8 +1,14 @@
-import {createContext, Dispatch, SetStateAction} from 'react'
+// import {createContext, Dispatch, SetStateAction} from 'react'
+import * as React from 'react';
 
-export type AuthContext = {
-    isAuth:Boolean,
-    setIsAuth:Dispatch<SetStateAction<boolean>>,
-    isLoading:Boolean,
+interface IAuthContext {
+    isAuth:Boolean | null;
+    setIsAuth:React.Dispatch<React.SetStateAction<boolean| null>>;
+    isLoading:Boolean| null;
   }
-export const MyAuthContext = createContext<AuthContext>(null);
+export const AuthContext = React.createContext<IAuthContext>({
+  isAuth: null,
+  setIsAuth: () => {},
+  isLoading: null,
+});
+

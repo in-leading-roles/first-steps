@@ -18,7 +18,7 @@ async function start() {
     SwaggerModule.setup('api/docs', app, document);
 
 
-    app.setBaseViewsDir(path.join(__dirname, 'views'));
+    app.setBaseViewsDir(path.join(__dirname, 'server/views'))
     app.set('view engine', 'js');
     app.engine('js', require('express-react-views').createEngine());
 

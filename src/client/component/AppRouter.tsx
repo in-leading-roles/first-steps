@@ -6,16 +6,16 @@ import Loader from './UI/Loader/Loader';
 import HrPanel from '../pages/HrPanel';
 
 const AppRouter = () => {
-  const { isAuth, isLoading } = React.useContext(MyAuthContext);
+  // const { isAuth, isLoading } = React.useContext(MyAuthContext);
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  // if (isLoading) {
+  //   return <Loader />;
+  // }
 
   return (
-    <div>
-        <Route path="/" element={ <HrPanel/> } />
-    </div>
+    <Routes>
+      <Route path="/hr" element={<HrPanel />} />
+    </Routes>
   );
 };
 export default AppRouter;

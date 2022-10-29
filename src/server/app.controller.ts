@@ -1,12 +1,11 @@
-import { Controller, Get, Render } from "@nestjs/common";
-import { render } from "react-dom";
-import { SkipAuth } from "./auth/jwt-auth/skip-auth.decorator";
+import {Controller, Get, Render} from '@nestjs/common';
+import { SkipAuth } from './auth/jwt-auth/skip-auth.decorator';
 
 @Controller('/')
 export class AppController {
 
     @SkipAuth()
-    @Get([''])
+    @Get(['', 'hr'])
     @Render('layout')
     pages(){
 

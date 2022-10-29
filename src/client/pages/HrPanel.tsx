@@ -1,10 +1,9 @@
 import * as React from 'react';
+import { Calendar } from '../component/Calendar';
 
 const HrPanel = () => {
     return (
-    <div>
-        <h1>Страница для Hr</h1>
-    </div>
+    <Calendar/>
     )
 }
 

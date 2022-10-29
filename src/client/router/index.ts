@@ -1,8 +1,8 @@
 import Login from "../pages/Login";
-import HrPanel from "../pages/HrPanel";
+import HrPanelAddUsers from "../pages/HrPanelAddUser";
 
 export const privateRoutes = [
-    {path: '/HR', component: HrPanel, exact: true}
+    {path: '/HR', component: HrPanelAddUsers, exact: true}
 ]
 
 export const publicRoutes = [

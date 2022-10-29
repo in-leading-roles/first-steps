@@ -3,9 +3,10 @@ import {AuthContext} from '../context/index';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from '../router';
 import Loader from './UI/Loader/Loader';
-import HrPanel from '../pages/HrPanel';
+import HrPanelAddUser from '../pages/HrPanelAddUser';
 import Login from '../pages/Login';
 import { Redirect } from '@nestjs/common';
+import HrPanelUsers from '../pages/HrPanelUsers';
 
 const AppRouter = () => {
   
@@ -22,9 +23,11 @@ const AppRouter = () => {
     <div>
       <Routes>
         <Route />
-        <Route path="/hr" element={<HrPanel />} />
+        <Route path="/hr/users" element={<HrPanelUsers />} />
+        <Route path="/hr/users/add" element={<HrPanelAddUser />} />
+        <Route path="/hr/events" element={<HrPanelAddUser />} />
       </Routes>
-      <Navigate to="/hr" replace={true} />
+      <Navigate to="/hr/users" replace={true} />
     </div>
     :
     <div>

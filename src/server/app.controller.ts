@@ -5,7 +5,7 @@ import { SkipAuth } from './auth/jwt-auth/skip-auth.decorator';
 export class AppController {
 
     @SkipAuth()
-    @Get(['', 'hr', 'login'])
+    @Get(['', 'hr', 'login', 'hr/*'])
     @Render('layout')
     pages(){
 

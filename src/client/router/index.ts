@@ -1,4 +1,4 @@
-import Login from "../pages/HrPanel";
+import Login from "../pages/Login";
 import HrPanel from "../pages/HrPanel";
 
 export const privateRoutes = [

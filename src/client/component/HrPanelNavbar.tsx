@@ -14,8 +14,8 @@ const HrPanelNavbar = () => {
 
   return (
     <div>
-      <Link to="/adding-users">Пользователи</Link>
-      <Link to="/events">События</Link>
+      <Link to="/hr/users/view">Пользователи</Link>
+      <Link to="/hr/events">События</Link>
       <Button onClick={handlePostForm} variant="contained">
         LOG OUT
       </Button>

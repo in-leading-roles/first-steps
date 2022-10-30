@@ -27,6 +27,7 @@ const Login = () => {
       })
       .then((response) => {
         if (response['token']) {
+          window.location.href = "/hr/users/view";
           setErrorDisplay('none');
           setIsAuth(response['token']);
           localStorage.setItem('auth', response['token']);

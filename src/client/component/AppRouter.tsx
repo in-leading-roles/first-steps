@@ -24,15 +24,15 @@ const AppRouter = () => {
         <Route path="/hr/users/add" element={<HrPanelAddUser />} />
         <Route path="/hr/events" element={<HrPanelAddUser />} />
       </Routes>
-      {/* <Navigate to="/hr/users/view" replace={true} />`` */}
     </div>
   ) : (
     <div>
       <Routes>
         <Route />
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-      <Navigate to="/login" replace={true} />
+        <Navigate to="/login" replace={true} />
     </div>
   );
 };

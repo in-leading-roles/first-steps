@@ -18,7 +18,7 @@ const HrPanelNavbar = () => {
       <Link to="/events">События</Link>
       <Button onClick={handlePostForm} variant="contained">
         LOG OUT
-      </Button>{' '}
+      </Button>
       {/* Попробуй это запихать в заглушку профиля */}
     </div>
   );

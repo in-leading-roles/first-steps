@@ -22,7 +22,7 @@ const HrPanelUsers = () => {
   }, []);
 
   const handleForm = (e: React.FormEvent) => {
-    window.open('/hr/users/add');
+    window.location.href = "/hr/users/add";
     e.preventDefault();
   };
 

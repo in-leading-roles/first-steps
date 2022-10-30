@@ -14,9 +14,6 @@ const HrEventsAdd = () => {
   const [endDateValue, setEndDate] = React.useState();
 
   const handleForm = (e: React.FormEvent) => {
-
-    // console.log(JSON.stringify({ title: titleValue, startDate: startDateValue, endDateValue:endDateValue}))
-
     fetch('/events', {
         method: 'post',
         headers: new Headers({
@@ -28,7 +25,6 @@ const HrEventsAdd = () => {
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log(res);
           if (res['title']) {
             window.location.href = "/hr/events";
           } else {

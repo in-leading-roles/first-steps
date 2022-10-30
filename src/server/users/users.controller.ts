@@ -1,8 +1,10 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { SkipAuth } from 'dist/server/auth/jwt-auth/skip-auth.decorator';
 import { GetUserEventsResponse } from 'src/common/GetUserEventsResponse';
 import { GetUsersResponse } from 'src/common/GetUsersResponse';
 import { Event } from '../events/events.model';
+import { Role } from '../roles/roles.model';
 import { createUserDto } from './dto/create-user.dto';
 import { User } from './users.model';
 import { UsersService } from './users.service';
@@ -11,6 +13,12 @@ import { UsersService } from './users.service';
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
+
+  @SkipAuth()
+  @Get("getbylogin/:login")
+  getByLogin(@Param('login') login: string){
+    return this.userService.getByLogin(login);
+  }
 
   @ApiOperation({ summary: 'Получение всех пользователей' })
   @ApiResponse({ status: 200, type: [User] })
@@ -45,5 +53,20 @@ export class UsersController {
   @Get('getevents/:id')
   getEvents(@Param('id') id: string):GetUserEventsResponse {
     return this.userService.getUserEvents(id);
+  }
+
+  @SkipAuth()
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'id пользователя',
+    example: 'id',
+    type: 'string',
+  })
+  @ApiOperation({ summary: 'Получение ролей пользователя' })
+  @ApiResponse({ status: 200, type: [Role] })
+  @Get('roles/:id')
+  getUserRoles(@Param('id') id: string){
+    return this.userService.getUserRoles(id);
   }
 }

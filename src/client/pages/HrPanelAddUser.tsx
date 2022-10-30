@@ -10,7 +10,6 @@ const HrPanelAddUser = () => {
   const [errorDisplay, setErrorDisplay] = React.useState('none');
 
   const handleForm = (e: React.FormEvent) => {
-    console.log(JSON.stringify({ login: loginValue }));
     fetch('/auth/registration', {
       method: 'post',
       headers: new Headers({
@@ -22,7 +21,6 @@ const HrPanelAddUser = () => {
     })
       .then<GetUsersResponse>((res) => res.json())
       .then((res) => {
-        console.log(res);
         if (res['login']) {
           setErrorDisplay('none');
           window.location.href = "/hr/users/view";

@@ -7,6 +7,8 @@ import HrPanelAddUser from '../pages/HrPanelAddUser';
 import Login from '../pages/Login';
 import { Redirect } from '@nestjs/common';
 import HrPanelUsers from '../pages/HrPanelUsers';
+import HrEvents from '../pages/HrEvents';
+import HrEventsAdd from '../pages/HrEventsAdd';
 
 const AppRouter = () => {
   const { isAuth, isLoading } = React.useContext(AuthContext);
@@ -22,7 +24,10 @@ const AppRouter = () => {
         <Route />
         <Route path="/hr/users/view" element={<HrPanelUsers />} />
         <Route path="/hr/users/add" element={<HrPanelAddUser />} />
-        <Route path="/hr/events" element={<HrPanelAddUser />} />
+        <Route path="/hr/events" element={<HrEvents />} />
+        <Route path="/hr/events/add" element={<HrEventsAdd />} />
+        <Route path="/login" element={<Navigate to="/hr/users/view" />} />
+        <Route path="" element={<Navigate to="/hr/users/view" />} />
       </Routes>
     </div>
   ) : (

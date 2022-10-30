@@ -40,12 +40,12 @@ export class EventsController {
     return this.eventsService.getEventById(id);
   }
 
-    @ApiOperation({summary: 'Создание события'})
-    @ApiResponse({status:200, type: Event})
-    @Post()
-    create(@Body() dto: CreateEventsDto){
-        return this.eventsService.createEvent(dto);
-    }
+  @ApiOperation({summary: 'Создание события'})
+  @ApiResponse({status:200, type: Event})
+  @Post()
+  create(@Body() dto: CreateEventsDto){
+      return this.eventsService.createEvent(dto);
+  }
     
     @ApiOperation({summary: 'Удаление события'})
     @ApiResponse({status:200, description:  JSON.stringify({

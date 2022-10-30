@@ -12,3 +12,12 @@ export const AuthContext = React.createContext<IAuthContext>({
   isLoading: null,
 });
 
+interface IRolesContext {
+  roles: string | null;
+  setRoles:React.Dispatch<React.SetStateAction<string | null>>,
+}
+export const RolesContext = React.createContext<IRolesContext>({
+  roles: null,
+  setRoles: () => {},
+})
+

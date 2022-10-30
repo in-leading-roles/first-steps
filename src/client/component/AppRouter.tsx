@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AuthContext } from '../context/index';
+import { AuthContext, RolesContext } from '../context/index';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from '../router';
 import Loader from './UI/Loader/Loader';
@@ -9,10 +9,12 @@ import { Redirect } from '@nestjs/common';
 import HrPanelUsers from '../pages/HrPanelUsers';
 import HrEvents from '../pages/HrEvents';
 import HrEventsAdd from '../pages/HrEventsAdd';
+import UserMain from '../pages/UserMain';
+import AuthRouter from './AuthRouter';
 
 const AppRouter = () => {
   const { isAuth, isLoading } = React.useContext(AuthContext);
-  console.log(isAuth);
+  const { roles } = React.useContext(RolesContext);
 
   if (isLoading) {
     return <Loader />;
@@ -20,24 +22,17 @@ const AppRouter = () => {
 
   return isAuth ? (
     <div>
-      <Routes>
-        <Route />
-        <Route path="/hr/users/view" element={<HrPanelUsers />} />
-        <Route path="/hr/users/add" element={<HrPanelAddUser />} />
-        <Route path="/hr/events" element={<HrEvents />} />
-        <Route path="/hr/events/add" element={<HrEventsAdd />} />
-        <Route path="/login" element={<Navigate to="/hr/users/view" />} />
-        <Route path="" element={<Navigate to="/hr/users/view" />} />
-      </Routes>
+      <AuthRouter />
     </div>
   ) : (
     <div>
       <Routes>
         <Route />
-        <Route path="/" element={<Login />} />
+        <Route path="" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-        <Navigate to="/login" replace={true} />
+      <Navigate to="/login" replace={true} />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { SkipAuth } from 'dist/server/auth/jwt-auth/skip-auth.decorator';
 import { GetUserEventsResponse } from 'src/common/GetUserEventsResponse';
 import { GetUsersResponse } from 'src/common/GetUsersResponse';
 import { Event } from '../events/events.model';
@@ -12,6 +13,12 @@ import { UsersService } from './users.service';
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
+
+  @SkipAuth()
+  @Get("getbylogin/:login")
+  getByLogin(@Param('login') login: string){
+    return this.userService.getByLogin(login);
+  }
 
   @ApiOperation({ summary: 'Получение всех пользователей' })
   @ApiResponse({ status: 200, type: [User] })
@@ -48,7 +55,7 @@ export class UsersController {
     return this.userService.getUserEvents(id);
   }
 
-
+  @SkipAuth()
   @ApiParam({
     name: 'id',
     required: true,

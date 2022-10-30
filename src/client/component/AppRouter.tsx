@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {AuthContext} from '../context/index';
+import { AuthContext } from '../context/index';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from '../router';
 import Loader from './UI/Loader/Loader';
@@ -9,7 +9,6 @@ import { Redirect } from '@nestjs/common';
 import HrPanelUsers from '../pages/HrPanelUsers';
 
 const AppRouter = () => {
-  
   const { isAuth, isLoading } = React.useContext(AuthContext);
   console.log(isAuth);
 
@@ -17,19 +16,17 @@ const AppRouter = () => {
     return <Loader />;
   }
 
-  return (
-    isAuth
-    ?
+  return isAuth ? (
     <div>
       <Routes>
         <Route />
-        <Route path="/hr/users" element={<HrPanelUsers />} />
+        <Route path="/hr/users/view" element={<HrPanelUsers />} />
         <Route path="/hr/users/add" element={<HrPanelAddUser />} />
         <Route path="/hr/events" element={<HrPanelAddUser />} />
       </Routes>
-      {/* <Navigate to="/hr/users" replace={true} /> */}
+      {/* <Navigate to="/hr/users/view" replace={true} />`` */}
     </div>
-    :
+  ) : (
     <div>
       <Routes>
         <Route />

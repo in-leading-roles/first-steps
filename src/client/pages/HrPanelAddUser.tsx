@@ -1,48 +1,37 @@
 import * as React from 'react';
-import { Link, Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
+import { Link, Route, Routes, Navigate, BrowserRouter, useNavigate } from 'react-router-dom';
 import HrPanelNavbar from '../component/HrPanelNavbar';
 import { GetUsersResponse } from 'src/common/GetUsersResponse';
 import { Alert, Button, TextField } from '@mui/material';
+import 'whatwg-fetch';
 
 const HrPanelAddUser = () => {
   const [loginValue, setLogin] = React.useState('');
-  const [user, setUser] = React.useState();
   const [errorDisplay, setErrorDisplay] = React.useState('none');
 
   const handleForm = (e: React.FormEvent) => {
+    console.log(JSON.stringify({ login: loginValue }));
     fetch('/auth/registration', {
       method: 'post',
       headers: new Headers({
         Authorization: `Bearer ${localStorage.getItem('auth')}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       }),
       body: JSON.stringify({ login: loginValue }),
     })
-      .then((response) => {
-        console.log('Get response');
-        return response.json();
-      })
-      .then((response) => {
-        if (response['login']) {
+      .then<GetUsersResponse>((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        if (res['login']) {
+          console.log('GOOOOOOOOO');
           setErrorDisplay('none');
-          // return <Navigate to="/hr/users/add" replace={true} />;
+          window.location.href = "/hr/users/view";
         } else {
           setErrorDisplay('block');
         }
       });
-    e.preventDefault();
   };
-
-  const [users, setUsers] = React.useState([]);
-  React.useEffect(() => {
-    fetch('/users', {
-      method: 'GET',
-      headers: new Headers({
-        Authorization: `Bearer ${localStorage.getItem('auth')}`,
-      }),
-    })
-      .then<GetUsersResponse>((res) => res.json())
-      .then(async (res) => setUsers(await res));
-  }, []);
 
   return (
     <div>

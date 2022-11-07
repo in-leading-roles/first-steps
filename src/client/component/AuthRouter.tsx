@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AuthContext, RolesContext } from '../context/index';
+import { AuthContext } from '../context/index';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import HrPanelAddUser from '../pages/HrPanelAddUser';
 import Login from '../pages/Login';

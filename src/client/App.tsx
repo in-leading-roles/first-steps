@@ -2,7 +2,7 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 import AppRouter from './component/AppRouter';
-import { AuthContext, RolesContext } from './context';
+import { AuthContext } from './context';
 
 const App = () => {
   const [isAuth, setIsAuth] = React.useState(null);
@@ -23,12 +23,6 @@ const App = () => {
   }, []);
 
   return (
-    // <RolesContext.Provider
-    //   value={{
-    //     roles,
-    //     setRoles,
-    //   }}
-    // >
     <AuthContext.Provider
       value={{
         isAuth,
@@ -42,7 +36,6 @@ const App = () => {
         <AppRouter />
       </BrowserRouter>
     </AuthContext.Provider>
-    // </RolesContext.Provider>
   );
 };
 

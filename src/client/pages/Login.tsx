@@ -3,7 +3,7 @@ import { Box, Button, TextField, Alert } from '@mui/material';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginResponse } from 'src/common/LoginResponse';
-import { AuthContext, RolesContext } from '../context';
+import { AuthContext } from '../context';
 import 'whatwg-fetch';
 
 const Login = () => {

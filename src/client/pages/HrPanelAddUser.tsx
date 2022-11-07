@@ -23,7 +23,7 @@ const HrPanelAddUser = () => {
       .then((res) => {
         if (res['login']) {
           setErrorDisplay('none');
-          window.location.href = "/hr/users/view";
+          window.location.href = "/users";
         } else {
           setErrorDisplay('block');
         }

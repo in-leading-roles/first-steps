@@ -7,7 +7,7 @@ import LogoutButton from './LogoutButton';
 const HrPanelNavbar = () => {
   return (
     <div>
-      <Link to="/hr/users/view">Пользователи</Link>
+      <Link to="/users">Пользователи</Link>
       <Link to="/hr/events">События</Link>
       <LogoutButton/>
     </div>

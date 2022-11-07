@@ -63,7 +63,7 @@ const Login = () => {
 
                   setIsAuth(response['token']);
                   localStorage.setItem('auth', response['token']);
-                  window.location.href = '/hr/users/view';
+                  window.location.href = '/users';
                 });
 
             });

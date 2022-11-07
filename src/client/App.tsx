@@ -2,10 +2,7 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 import AppRouter from './component/AppRouter';
-import { Calendar } from '../client/component/Calendar';
 import { AuthContext, RolesContext } from './context';
-import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
-import HrPanelAddUsers from './pages/HrPanelAddUser';
 
 const App = () => {
   const [isAuth, setIsAuth] = React.useState(null);

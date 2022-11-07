@@ -43,7 +43,7 @@ export class UsersService {
     }
     
     async findOne(login: string) {
-        return this.userRepository.findOne({where: {login}});
+        return this.userRepository.findOne({where: {login}, include:{all:true}});
     }
 
     async getUserRoles(id: string) {

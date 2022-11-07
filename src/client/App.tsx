@@ -6,40 +6,43 @@ import { AuthContext, RolesContext } from './context';
 
 const App = () => {
   const [isAuth, setIsAuth] = React.useState(null);
-  const [isLoading, setLoading] = React.useState(true);
   const [roles, setRoles] = React.useState(null);
+  const [isLoading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     if (localStorage.getItem('auth')) {
       setIsAuth(true);
-    }else{
+      console.log('IsAuth', true);
+    } else {
       setIsAuth(false);
+      console.log('IsAuth', false);
     }
-    if (localStorage.getItem('roles')) {
-      setRoles(localStorage.getItem('roles'));
-    }
+    setRoles(localStorage.getItem('roles'));
+    console.log(localStorage.getItem('roles'));
     setLoading(false);
   }, []);
 
   return (
-    <RolesContext.Provider
+    // <RolesContext.Provider
+    //   value={{
+    //     roles,
+    //     setRoles,
+    //   }}
+    // >
+    <AuthContext.Provider
       value={{
+        isAuth,
+        setIsAuth,
         roles,
         setRoles,
+        isLoading,
       }}
     >
-      <AuthContext.Provider
-        value={{
-          isAuth,
-          setIsAuth,
-          isLoading,
-        }}
-      >
-        <BrowserRouter>
-          <AppRouter />
-        </BrowserRouter>
-      </AuthContext.Provider>
-    </RolesContext.Provider>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </AuthContext.Provider>
+    // </RolesContext.Provider>
   );
 };
 

@@ -7,8 +7,8 @@ import { AuthContext, RolesContext } from '../context';
 import 'whatwg-fetch';
 
 const Login = () => {
-  const { isAuth, setIsAuth } = React.useContext(AuthContext);
-  const { roles, setRoles } = React.useContext(RolesContext);
+  const { isAuth, setIsAuth, roles, setRoles } = React.useContext(AuthContext);
+  // const { roles, setRoles } = React.useContext(AuthContext);
   const [loginValue, setLogin] = React.useState('');
   const [passwordValue, setPassword] = React.useState('');
   const [errorDisplay, setErrorDisplay] = React.useState('none');
@@ -23,54 +23,67 @@ const Login = () => {
       },
       body: JSON.stringify({ login: loginValue, password: passwordValue }),
     })
-      .then<LoginResponse>((response) => {
-        return response.json();
+      .then<LoginResponse>(async (response) => {
+        return await response.json();
       })
-      .then((response) => {
-        if (response['token']) {
-          setErrorDisplay('none');
+      .then((response)=>{
+        let roles = response['roles'];
+        let rolesValues = roles.map((role)=>{
+          return role['value'];
+        })
+        localStorage.setItem('roles', rolesValues);
+        localStorage.setItem('auth', response['token']);
+        setRoles(rolesValues);
+        setIsAuth(response['token']);
+      })
 
-          //получаем пользователя
-          fetch(`/users/getbylogin/${loginValue}`, {
-            method: 'get',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-          })
-            .then((res) => {
-              return res.json();
-            })
-            .then((res) => {
-              console.log(res);
-              setCurrentUser(res);
-              console.log('currentUser', res['id']);
-              // Из него вытаскиваемid
-              fetch(`/users/roles/${res['id']}`, {
-                method: 'get',
-                headers: {
-                  Accept: 'application/json',
-                  'Content-Type': 'application/json',
-                },
-              })
-                .then((res) => {
-                  return res.json();
-                })
-                .then(async (res) => {
-                  setRoles(await res[0]['value']);
-                  console.log('array', res);
-                  localStorage.setItem('roles', res[0]['value']);
+      // TODO: Снеси с сервера лишнюю шелупонь
+      
+      // .then((response) => {
+      //   if (response['token']) {
+      //     setErrorDisplay('none');
 
-                  setIsAuth(response['token']);
-                  localStorage.setItem('auth', response['token']);
-                  window.location.href = '/users';
-                });
+      //     //получаем пользователя
+      //     fetch(`/users/getbylogin/${loginValue}`, {
+      //       method: 'get',
+      //       headers: {
+      //         Accept: 'application/json',
+      //         'Content-Type': 'application/json',
+      //       },
+      //     })
+      //       .then((res) => {
+      //         return res.json();
+      //       })
+      //       .then((res) => {
+      //         console.log(res);
+      //         setCurrentUser(res);
+      //         console.log('currentUser', res['id']);
+      //         // Из него вытаскиваемid
+      //         fetch(`/users/roles/${res['id']}`, {
+      //           method: 'get',
+      //           headers: {
+      //             Accept: 'application/json',
+      //             'Content-Type': 'application/json',
+      //           },
+      //         })
+      //           .then((res) => {
+      //             return res.json();
+      //           })
+      //           .then(async (res) => {
+      //             setRoles(await res[0]['value']);
+      //             console.log('array', res);
+      //             localStorage.setItem('roles', res[0]['value']);
 
-            });
-        } else {
-          setErrorDisplay('block');
-        }
-      });
+      //             setIsAuth(response['token']);
+      //             localStorage.setItem('auth', response['token']);
+      //             window.location.href = '/users';
+      //           });
+
+      //       });
+      //   } else {
+      //     setErrorDisplay('block');
+      //   }
+      // });
     e.preventDefault();
   };
 

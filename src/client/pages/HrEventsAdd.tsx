@@ -26,7 +26,7 @@ const HrEventsAdd = () => {
         .then((res) => res.json())
         .then((res) => {
           if (res['title']) {
-            window.location.href = "/events";
+            window.location.href = "/eventspanel";
           } else {
           }
         });

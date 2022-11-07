@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RolesContext } from '../context/index';
+import { AuthContext, RolesContext } from '../context/index';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import HrPanelAddUser from '../pages/HrPanelAddUser';
 import Login from '../pages/Login';
@@ -9,18 +9,18 @@ import HrEventsAdd from '../pages/HrEventsAdd';
 import UserMain from '../pages/UserMain';
 
 const AuthRouter = () => {
-  const { roles } = React.useContext(RolesContext);
+  const { roles } = React.useContext(AuthContext);
 
-  return (roles == 'HR') ? (
+  return (roles.includes('HR')) ? (
     <Routes>
       <Route />
-      <Route path="/main" element={<Navigate to="/users" />} />
-      <Route path="/login" element={<Navigate to="/users" />} />
-      <Route path="" element={<Navigate to="/users" />} />
-      <Route path="/users" element={<HrPanelUsers />} />
-      <Route path="/users/add" element={<HrPanelAddUser />} />
-      <Route path="/events" element={<HrEvents />} />
-      <Route path="/events/add" element={<HrEventsAdd />} />
+      <Route path="/main" element={<Navigate to="/userspanel" />} />
+      <Route path="/login" element={<Navigate to="/userspanel" />} />
+      <Route path="" element={<Navigate to="/userspanel" />} />
+      <Route path="/userspanel" element={<HrPanelUsers />} />
+      <Route path="/userspanel/add" element={<HrPanelAddUser />} />
+      <Route path="/eventspanel" element={<HrEvents />} />
+      <Route path="/eventspanel/add" element={<HrEventsAdd />} />
     </Routes>
   ) : (
     <div>

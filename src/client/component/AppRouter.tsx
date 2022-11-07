@@ -28,8 +28,6 @@ const AppRouter = () => {
     <div>
       <Routes>
         <Route />
-        <Route path="" element={<Navigate to="/login" />} />
-        <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
       </Routes>
       <Navigate to="/login" replace={true} />

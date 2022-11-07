@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { SkipAuth } from 'dist/server/auth/jwt-auth/skip-auth.decorator';
+import { SkipAuth } from '../auth/jwt-auth/skip-auth.decorator';
 import { GetUserEventsResponse } from 'src/common/GetUserEventsResponse';
 import { GetUsersResponse } from 'src/common/GetUsersResponse';
 import { Event } from '../events/events.model';

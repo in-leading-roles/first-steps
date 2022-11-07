@@ -12,13 +12,11 @@ const App = () => {
   React.useEffect(() => {
     if (localStorage.getItem('auth')) {
       setIsAuth(true);
-      console.log('isAuth', isAuth)
     }else{
       setIsAuth(false);
     }
     if (localStorage.getItem('roles')) {
       setRoles(localStorage.getItem('roles'));
-      console.log(localStorage.getItem('roles'))
     }
     setLoading(false);
   }, []);

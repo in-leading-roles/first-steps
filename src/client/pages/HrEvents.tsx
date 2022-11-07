@@ -8,7 +8,7 @@ const HrPanelAddUser = () => {
   const [users, setUsers] = React.useState([]);
   
   const handleForm = (e: React.FormEvent) => {
-    window.location.href = "/hr/events/add";
+    window.location.href = "/events/add";
     e.preventDefault();
   };
   

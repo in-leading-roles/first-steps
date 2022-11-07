@@ -19,8 +19,8 @@ const AuthRouter = () => {
       <Route path="" element={<Navigate to="/users" />} />
       <Route path="/users" element={<HrPanelUsers />} />
       <Route path="/users/add" element={<HrPanelAddUser />} />
-      <Route path="/hr/events" element={<HrEvents />} />
-      <Route path="/hr/events/add" element={<HrEventsAdd />} />
+      <Route path="/events" element={<HrEvents />} />
+      <Route path="/events/add" element={<HrEventsAdd />} />
     </Routes>
   ) : (
     <div>

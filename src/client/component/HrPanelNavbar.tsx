@@ -8,7 +8,7 @@ const HrPanelNavbar = () => {
   return (
     <div>
       <Link to="/users">Пользователи</Link>
-      <Link to="/hr/events">События</Link>
+      <Link to="/events">События</Link>
       <LogoutButton/>
     </div>
   );

@@ -24,7 +24,7 @@ export class RolesController {
     return this.roleService.getRoleByValue(value);
   }
 
-  /*@Roles("HR")*/
+  @Roles("HR")
   @ApiOperation({ summary: 'Создание роли' })
   @ApiResponse({ status: 200, type: Role })
   @Post()

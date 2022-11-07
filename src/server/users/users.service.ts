@@ -21,11 +21,6 @@ export class UsersService {
         return user;
     }
 
-    async getByLogin(login: string) {
-        const user = await this.userRepository.findOne({where: {login}, include:{all:true}});
-        return user;
-    }
-
     async createUser(dto: createUserDto){
         const password = passwordGenerator.generatePassword({length:10, obscureSymbols: false});
         const hashPassword = await bcrypt.hash(password, 5);

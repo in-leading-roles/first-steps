@@ -14,12 +14,6 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private userService: UsersService) {}
 
-  @SkipAuth()
-  @Get("getbylogin/:login")
-  getByLogin(@Param('login') login: string){
-    return this.userService.getByLogin(login);
-  }
-
   @ApiOperation({ summary: 'Получение всех пользователей' })
   @ApiResponse({ status: 200, type: [User] })
   @Get()

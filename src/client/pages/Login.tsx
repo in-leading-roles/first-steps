@@ -36,54 +36,6 @@ const Login = () => {
         setRoles(rolesValues);
         setIsAuth(response['token']);
       })
-
-      // TODO: Снеси с сервера лишнюю шелупонь
-      
-      // .then((response) => {
-      //   if (response['token']) {
-      //     setErrorDisplay('none');
-
-      //     //получаем пользователя
-      //     fetch(`/users/getbylogin/${loginValue}`, {
-      //       method: 'get',
-      //       headers: {
-      //         Accept: 'application/json',
-      //         'Content-Type': 'application/json',
-      //       },
-      //     })
-      //       .then((res) => {
-      //         return res.json();
-      //       })
-      //       .then((res) => {
-      //         console.log(res);
-      //         setCurrentUser(res);
-      //         console.log('currentUser', res['id']);
-      //         // Из него вытаскиваемid
-      //         fetch(`/users/roles/${res['id']}`, {
-      //           method: 'get',
-      //           headers: {
-      //             Accept: 'application/json',
-      //             'Content-Type': 'application/json',
-      //           },
-      //         })
-      //           .then((res) => {
-      //             return res.json();
-      //           })
-      //           .then(async (res) => {
-      //             setRoles(await res[0]['value']);
-      //             console.log('array', res);
-      //             localStorage.setItem('roles', res[0]['value']);
-
-      //             setIsAuth(response['token']);
-      //             localStorage.setItem('auth', response['token']);
-      //             window.location.href = '/users';
-      //           });
-
-      //       });
-      //   } else {
-      //     setErrorDisplay('block');
-      //   }
-      // });
     e.preventDefault();
   };
 

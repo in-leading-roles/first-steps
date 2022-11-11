@@ -11,6 +11,8 @@ import { Event } from "./events/events.model";
 import { UserEvents } from "./events/users-events.model";
 import { AuthModule } from './auth/auth.module';
 import { AppController } from "./app.controller";
+import { Team } from "./teams/teams.model";
+import { UserTeams } from "./teams/user-teams.model";
 
 @Module({
     imports: [
@@ -25,7 +27,7 @@ import { AppController } from "./app.controller";
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, Role, UserRoles, Event, UserEvents],
+            models: [User, Role, UserRoles, Event, UserEvents, Team,  UserTeams],
             autoLoadModels: true,
           }),
         UsersModule,

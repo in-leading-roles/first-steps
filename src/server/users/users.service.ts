@@ -50,4 +50,9 @@ export class UsersService {
         const user = await this.userRepository.findOne({where: {id}, include:{all:true}});
         return user.roles;
     }
+
+    async getUserTeams(id: string) {
+        const user = await this.userRepository.findOne({where: {id}, include:{all:true}});
+        return user.teams;
+    }
 }

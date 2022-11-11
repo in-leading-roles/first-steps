@@ -9,6 +9,10 @@ import { UserRoles } from "./server/roles/user-roles.model";
 import { EventsModule } from './server/events/events.module';
 import { Event } from "./server/events/events.model";
 import { AuthModule } from "./server/auth/auth.module";
+import { TeamsModule } from './server/teams/teams.module';
+import { Team } from "./server/teams/teams.model";
+import { UserTeams } from "./server/teams/user-teams.model";
+import { UserEvents } from "./server/events/users-events.model";
 
 @Global()
 @Module({
@@ -23,13 +27,14 @@ import { AuthModule } from "./server/auth/auth.module";
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, Role, UserRoles, Event],
+            models: [User, Role, UserRoles, Event, UserEvents, Team,  UserTeams],
             autoLoadModels: true,
           }),
         UsersModule,
         RolesModule,
         EventsModule,
         AuthModule,
+        TeamsModule,
     ]
 })
 export class AppModule{}

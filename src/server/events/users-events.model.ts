@@ -14,4 +14,6 @@ export class UserEvents extends Model<UserEvents>{
     @ForeignKey(()=>User)
     @Column({type: DataType.INTEGER})
     userId: number;
+
+    
 }

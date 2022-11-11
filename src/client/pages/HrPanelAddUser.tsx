@@ -24,7 +24,7 @@ const HrPanelAddUser = () => {
       .then((res) => {
         if (res['login']) {
           setErrorDisplay('none');
-          window.location.href = "/users";
+          window.location.href = "/userspanel";
         } else {
           setErrorDisplay('block');
         }

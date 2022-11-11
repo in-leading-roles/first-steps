@@ -9,7 +9,8 @@ const HrPanelAddUser = () => {
   const [loginValue, setLogin] = React.useState('');
   const [errorDisplay, setErrorDisplay] = React.useState('none');
 
-  const handleForm = (e: React.FormEvent) => {
+  const registerUser = (e: React.FormEvent) => {
+    console.log(loginValue);
     fetch('/auth/registration', {
       method: 'post',
       headers: new Headers({
@@ -35,13 +36,15 @@ const HrPanelAddUser = () => {
       <HrPanelNavbar />
       <TextField
         label="Логин"
-        onChange={(e) => setLogin(e.target.value)}
+        onChange={(e) => {
+          setLogin(e.target.value);
+        }}
         type="text"
       />
       <Alert style={{ display: errorDisplay }} severity="error">
         Некорректный логин или пароль
       </Alert>
-      <Button onClick={handleForm} variant="contained">
+      <Button onClick={registerUser} variant="contained">
         Создать
       </Button>
     </div>

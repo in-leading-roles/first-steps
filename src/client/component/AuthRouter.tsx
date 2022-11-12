@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { AuthContext } from '../context/index';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import HrPanelAddUser from '../pages/HrPanelAddUser';
+import HrPanelAddUser from '../pages/Hr/Users/HrPanelAddUser';
 import Login from '../pages/Login';
-import HrPanelUsers from '../pages/HrPanelUsers';
-import HrEvents from '../pages/HrEvents';
-import HrEventsAdd from '../pages/HrEventsAdd';
-import UserMain from '../pages/UserMain';
+import HrPanelUsers from '../pages/Hr/Users/HrPanelUsers';
+import HrEvents from '../pages/Hr/Events/HrEvents';
+import HrEventsAdd from '../pages/Hr/Events/HrEventsAdd';
+import UserMain from '../pages/User/UserMain';
 
 const AuthRouter = () => {
   const { roles } = React.useContext(AuthContext);

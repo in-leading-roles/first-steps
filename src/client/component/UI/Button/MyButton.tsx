@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 
 const MyButton = ({children, ...props}) => {
     return (
-        <Button  {...props}>{children}</Button>
+        <Button {...props}>{children}</Button>
     );
 };
 

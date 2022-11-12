@@ -13,25 +13,14 @@ let now = Date()
 const currentDate = Date();
 
 export const Calendar: React.FC = () => {
-    const [events, setEvents] = React.useState([]);
-
-  // React.useEffect(() => {
-  //   fetch('/users/getevents/1', {
-  //       method: 'GET',
-  //       headers: new Headers({
-  //         Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZXMiOlsiSFIiXSwiaWF0IjoxNjY2OTk5Njk5fQ.T5kZHIb0iJtuUJC92t6JGR3Sr-ome9jKzEqAoZQMm7U`,
-  //       }),
-  //   })
-  //     .then<GetUserEventsResponse>((res) => res.json())
-  //     .then(async (res) => setEvents(await res));
-  // }, []);
+  const [events, setEvents] = React.useState([]);
 
   React.useEffect(() => {
     fetch('/events', {
-        method: 'GET',
-        headers: new Headers({
-          Authorization: `Bearer ${localStorage.getItem('auth')}`,
-        }),
+      method: 'GET',
+      headers: new Headers({
+        Authorization: `Bearer ${localStorage.getItem('auth')}`,
+      }),
     })
       .then<GetUserEventsResponse>((res) => res.json())
       .then(async (res) => setEvents(await res));

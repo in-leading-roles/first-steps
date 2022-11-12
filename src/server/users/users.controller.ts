@@ -8,6 +8,8 @@ import { Role } from '../roles/roles.model';
 import { createUserDto } from './dto/create-user.dto';
 import { User } from './users.model';
 import { UsersService } from './users.service';
+import { GetUserTeamsResponse } from 'src/common/GetUserTeamsResponse';
+import { Team } from 'src/server/teams/teams.model';
 
 @ApiTags('Пользователи')
 @Controller('users')
@@ -62,5 +64,19 @@ export class UsersController {
   @Get('roles/:id')
   getUserRoles(@Param('id') id: string){
     return this.userService.getUserRoles(id);
+  }
+
+  @ApiOperation({ summary: 'Получение команд пользователя' })
+  @ApiResponse({ status: 200, type: [Team] })
+  @Get('getteams/:id')
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'id пользователя',
+    example: 'id',
+    type: 'string',
+  })
+  getTeams(@Param('id') id: string):GetUserTeamsResponse {
+    return this.userService.getUserTeams(id);
   }
 }

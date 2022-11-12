@@ -15,7 +15,6 @@ export class AuthController {
     @ApiOperation({summary: 'Вход в аккаунт'})
     @Post('/login')
     async login(@Body() userDto: createUserDto):LoginResponse {
-      console.log(userDto);
       return this.authService.login(userDto);
     }
     

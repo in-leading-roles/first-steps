@@ -8,6 +8,7 @@ import 'whatwg-fetch';
 
 const Login = () => {
   const { isAuth, setIsAuth, roles, setRoles } = React.useContext(AuthContext);
+  // const { roles, setRoles } = React.useContext(AuthContext);
   const [loginValue, setLogin] = React.useState('');
   const [passwordValue, setPassword] = React.useState('');
   const [errorDisplay, setErrorDisplay] = React.useState('none');
@@ -26,7 +27,6 @@ const Login = () => {
         return await response.json();
       })
       .then((response)=>{
-        console.log(response['token']);
         let roles = response['roles'];
         let rolesValues = roles.map((role)=>{
           return role['value'];

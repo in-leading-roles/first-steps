@@ -1,93 +1,92 @@
 const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // Импортируем плагин
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-// Импортируем плагин
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-let mode = 'development'; // По умолчанию режим development
-if (process.env.NODE_ENV === 'production') {
-  // Режим production, если
-  // при запуске вебпака было указано --mode=production
-  mode = 'production';
-}
-
-const plugins = [
-  new HtmlWebpackPlugin({
-    template: './public/index.html', // Данный html будет использован как шаблон TODO:поменять
-  }),
-]; // Создаем массив плагинов
-
-if (process.env.SERVE) {
-  // Используем плагин только если запускаем devServer
-  plugins.push(new ReactRefreshWebpackPlugin());
-}
+const {
+    NODE_ENV
+} = process.env;
 
 module.exports = {
-  mode: mode,
-  plugins: plugins,
-  entry: './src/client/App.tsx',
-  devtool: 'source-map',
-  output: {
-    path: path.resolve(__dirname, 'public'),
-    assetModuleFilename: 'assets/[hash][ext][query]', // Все ассеты будут
-    // складываться в dist/assets
-    filename: 'bundle.js',
-    clean: true,
-  },
+    mode: NODE_ENV || "production",
+    entry: './src/client/App.tsx',
+    devtool: NODE_ENV !== 'production' ? 'inline-source-map' : '',
+    output: {
+        path: path.resolve(__dirname, 'public'),
+        filename: 'bundle.js'
+    },
 
-  devServer: {
-    hot: true, // Включает автоматическую перезагрузку страницы при изменениях
-  },
+    watchOptions: {
+        ignored: '**/node_modules',
+      },
 
-  target: 'node',
-  // externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
-  externalsPresets: {
-    node: true, // in order to ignore built-in modules like path, fs, etc.
-  },
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js', ".json"]
+    },
 
-  mode: 'production',
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(html)$/,
-        exclude: path.resolve(__dirname, 'node_modules'),
-        use: ['html-loader'],
-      }, // Добавляем загрузчик для html
-      {
-        test: /\.(s[ac]|c)ss$/i,
-        exclude: path.resolve(__dirname, 'node_modules'),
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
-        ],
-      }, // Добавляем загрузчики стилей
-      {
-        test: /\.(png|jpe?g|gif|svg|webp|ico)$/i,
-        exclude: path.resolve(__dirname, 'node_modules'),
-        type: mode === 'production' ? 'asset' : 'asset/resource', // В продакшен режиме
-        // изображения размером до 8кб будут инлайнится в код
-        // В режиме разработки все изображения будут помещаться в dist/assets
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)$/i,
-        exclude: path.resolve(__dirname, 'node_modules'),
-        type: 'asset/resource',
-      },
-      {
-        test: /\.(js|jsx|tsx|ts)$/,
-        exclude: path.resolve(__dirname, 'node_modules'),
-        loader: 'babel-loader',
-      },
-    ],
-  },
-  optimization: {
-    minimize: true,
-    minimizer: [new TerserPlugin()],
-  },
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                use: [
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            compilerOptions: { noEmit: false },
+                        }
+                    }
+                ],
+                exclude: [/node_modules/, /dist/],
+            },
+            {
+                test: /\.(css|s[ac]ss)$/i,
+                use: [
+                    { loader: 'style-loader' },
+                    {
+                        loader: "css-loader", options: {
+                            importLoaders: 1,
+                            // modules: true
+                        }
+                    },
+                    "sass-loader"
+                ]
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg$)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
+            },
+        ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: "./public/index.html",
+            favicon: "./public/favicon.ico",
+            filename: "index.html",
+            inject: "body",
+            hash: true
+        })
+    ]
+    // , devServer: {
+    //     allowedHosts: [
+    //         SERVER_HOST,
+    //         'localhost',
+    //     ],
+    //     historyApiFallback: true,
+    //     open: true,
+    //     hot: true,
+    //     host: SERVER_WEB_HOST,
+    //     port: SERVER_WEB_PORT,
+    //     proxy: {
+    //         '/api': proxy,
+    //         '/acc': proxy,
+    //         '/auth': proxy,
+    //         '/socket.io': {
+    //             target: proxy,
+    //             ws: true
+    //         },
+    //         '/images': proxy
+    //     }
+    // }
 };

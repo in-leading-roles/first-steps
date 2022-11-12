@@ -1,6 +1,6 @@
 import { Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { User } from "src/server/users/users.model";
-import { Event } from "src/server/events/events.model";
+import { User } from "src/server/models/users.model";
+import { Event } from "src/server/models/events.model";
 
 @Table({tableName: 'users_events', createdAt: false, updatedAt: false})
 export class UserEvents extends Model<UserEvents>{

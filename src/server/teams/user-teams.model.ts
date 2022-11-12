@@ -1,6 +1,6 @@
 import { Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { User } from "src/server/users/users.model";
-import { Team } from "src/server/teams/teams.model";
+import { User } from "src/server/models/users.model";
+import { Team } from "src/server/models/teams.model";
 
 
 @Table({tableName: 'users_teams', createdAt: false, updatedAt: false})

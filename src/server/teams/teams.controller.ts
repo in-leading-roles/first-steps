@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Roles } from '../auth/roles-auth/roles.decorator';
 import { CreateTeamDto } from './dto/create-team.dto';
-import { Team } from './teams.model';
+import { Team } from '../models/teams.model';
 import { TeamsService } from './teams.service';
 
 

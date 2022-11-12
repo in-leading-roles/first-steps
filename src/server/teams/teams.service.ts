@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateTeamDto } from './dto/create-team.dto';
-import { Team } from './teams.model';
+import { Team } from '../models/teams.model';
 import { UsersService } from 'src/server/users/users.service';
 
 @Injectable()

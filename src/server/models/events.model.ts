@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
-import { User } from "../users/users.model";
-import { UserEvents } from "./users-events.model";
+import { User } from "./users.model";
+import { UserEvents } from "../events/users-events.model";
 
 interface EventCreationAttrs{
     title: string;

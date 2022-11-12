@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
-import { User } from "src/server/users/users.model";
-import { UserTeams } from "./user-teams.model";
+import { User } from "src/server/models/users.model";
+import { UserTeams } from "../teams/user-teams.model";
 
 interface TeamCreationAttrs{
     value:string;

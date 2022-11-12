@@ -1,3 +1,3 @@
-import { Team } from "src/server/teams/teams.model"
+import { Team } from "src/server/models/teams.model"
 
 export type GetUserTeamsResponse = Promise<Team[]>

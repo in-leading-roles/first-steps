@@ -13,16 +13,20 @@ module.exports = {
         path: path.resolve(__dirname, 'public'),
         filename: 'bundle.js'
     },
+
     optimization: {
         removeAvailableModules: false,
         removeEmptyChunks: false,
         splitChunks: false,
-      },
+    },
 
     watchOptions: {
         ignored: '**/server',
         ignored: '**/node_modules',
-      },
+        ignored: '**/public',
+        ignored: '**/dist',
+        ignored: '**/common',
+    },
 
     resolve: {
         extensions: ['.ts', '.tsx', '.js', ".json"]
@@ -40,7 +44,7 @@ module.exports = {
                         }
                     }
                 ],
-                exclude: [/node_modules/, /dist/, /server/, /public/],
+                exclude: [/node_modules/, /dist/, /server/, /public/, /common/],
             },
             {
                 test: /\.(css|s[ac]ss)$/i,
@@ -73,25 +77,4 @@ module.exports = {
             hash: true
         })
     ]
-    // , devServer: {
-    //     allowedHosts: [
-    //         SERVER_HOST,
-    //         'localhost',
-    //     ],
-    //     historyApiFallback: true,
-    //     open: true,
-    //     hot: true,
-    //     host: SERVER_WEB_HOST,
-    //     port: SERVER_WEB_PORT,
-    //     proxy: {
-    //         '/api': proxy,
-    //         '/acc': proxy,
-    //         '/auth': proxy,
-    //         '/socket.io': {
-    //             target: proxy,
-    //             ws: true
-    //         },
-    //         '/images': proxy
-    //     }
-    // }
 };

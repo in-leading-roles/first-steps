@@ -43,6 +43,7 @@
     "@nestjs/typeorm": "^9.0.1",
     "agenda": "^5.0.0",
     "bcrypt": "^5.1.0",
+    "cron": "^2.1.0",
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.6",
     "devextreme": "22.1.6",

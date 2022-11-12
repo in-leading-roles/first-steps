@@ -13,6 +13,8 @@ import { AuthModule } from './auth/auth.module';
 import { AppController } from "./app.controller";
 import { Team } from "./models/teams.model";
 import { UserTeams } from "./teams/user-teams.model";
+import { RegularEvent } from "./models/regular-events.model";
+import { RegularEventsModule } from "./regular-events/regular-events.module";
 
 @Module({
     imports: [
@@ -27,13 +29,14 @@ import { UserTeams } from "./teams/user-teams.model";
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, Role, UserRoles, Event, UserEvents, Team,  UserTeams],
+            models: [User, Role, UserRoles, Event, UserEvents, Team,  UserTeams, RegularEvent],
             autoLoadModels: true,
           }),
         UsersModule,
         RolesModule,
         EventsModule,
         AuthModule,
+        RegularEventsModule
     ],
     controllers: [AppController]
 })

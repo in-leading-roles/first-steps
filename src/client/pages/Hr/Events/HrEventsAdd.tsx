@@ -38,9 +38,7 @@ const HrEventsAdd = () => {
 
   return (
     <div>
-      <HrPanelNavbar elements={[
-        <Link to="/userspanel">Пользовтеля</Link>,
-        <Link to="/eventspanel">События</Link>]}  />
+      <HrPanelNavbar elements={[]}  />
       <TextField
         label="Название события"
         onChange={(e) => settitle(e.target.value)}

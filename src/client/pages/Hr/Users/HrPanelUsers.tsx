@@ -26,9 +26,8 @@ const HrPanelUsers = () => {
 
   return (
     <div>
-      <HrPanelNavbar elements={[<Link to="/userspanel">Пользователи</Link>,
-      <Link to="/eventspanel">События</Link>,
-      <MyButton onClick={GoToAddUser}>Добавить пользователя</MyButton>
+      <HrPanelNavbar elements={[
+        <MyButton onClick={GoToAddUser}>Добавить пользователя</MyButton>
       ]} />
       {users.map((user, index) => (
         <div key={user.id}>

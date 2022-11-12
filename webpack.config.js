@@ -13,8 +13,14 @@ module.exports = {
         path: path.resolve(__dirname, 'public'),
         filename: 'bundle.js'
     },
+    optimization: {
+        removeAvailableModules: false,
+        removeEmptyChunks: false,
+        splitChunks: false,
+      },
 
     watchOptions: {
+        ignored: '**/server',
         ignored: '**/node_modules',
       },
 
@@ -34,7 +40,7 @@ module.exports = {
                         }
                     }
                 ],
-                exclude: [/node_modules/, /dist/],
+                exclude: [/node_modules/, /dist/, /server/, /public/],
             },
             {
                 test: /\.(css|s[ac]ss)$/i,
@@ -43,7 +49,6 @@ module.exports = {
                     {
                         loader: "css-loader", options: {
                             importLoaders: 1,
-                            // modules: true
                         }
                     },
                     "sass-loader"

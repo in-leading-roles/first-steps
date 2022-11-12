@@ -6,6 +6,7 @@ import { GetUsersResponse } from 'src/common/GetUsersResponse';
 import MyButton from '../../../component/UI/Button/MyButton';
 import HrPanelNavbar from '../HrPanelNavbar';
 import { Link } from 'react-router-dom';
+import { CreateEventResponce } from '../../../../common/CreateEventResponce';
 
 const HrEventsAdd = () => {
   const [users, setUsers] = React.useState([]);
@@ -25,7 +26,7 @@ const HrEventsAdd = () => {
       }),
       body: JSON.stringify({ title: titleValue, content: contentValue, startDate: startDateValue, endDate: endDateValue }),
     })
-      .then((res) => res.json())
+      .then<CreateEventResponce>((res) => res.json())
       .then((res) => {
         if (res['title']) {
           window.location.href = "/eventspanel";

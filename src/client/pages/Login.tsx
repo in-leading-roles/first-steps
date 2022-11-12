@@ -8,7 +8,6 @@ import 'whatwg-fetch';
 
 const Login = () => {
   const { isAuth, setIsAuth, roles, setRoles } = React.useContext(AuthContext);
-  // const { roles, setRoles } = React.useContext(AuthContext);
   const [loginValue, setLogin] = React.useState('');
   const [passwordValue, setPassword] = React.useState('');
   const [errorDisplay, setErrorDisplay] = React.useState('none');

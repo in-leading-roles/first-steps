@@ -1,8 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
-import { Role } from "src/server/roles/roles.model";
-import { Event } from "src/server/events/events.model";
-import { UserRoles } from "src/server/roles/user-roles.model";
+import { Role } from "../roles/roles.model";
+import { Event } from "../events/events.model";
+import { UserRoles } from "../roles/user-roles.model";
 import { UserEvents } from "../events/users-events.model";
 import { Team } from "src/server/teams/teams.model";
 import { UserTeams } from "../teams/user-teams.model";

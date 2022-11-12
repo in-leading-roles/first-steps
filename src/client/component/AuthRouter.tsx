@@ -1,29 +1,26 @@
 import * as React from 'react';
-import { AuthContext, RolesContext } from '../context/index';
+import { AuthContext } from '../context/index';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { privateRoutes, publicRoutes } from '../router';
-import Loader from './UI/Loader/Loader';
-import HrPanelAddUser from '../pages/HrPanelAddUser';
+import HrPanelAddUser from '../pages/Hr/Users/UsersPanel';
 import Login from '../pages/Login';
-import { Redirect } from '@nestjs/common';
-import HrPanelUsers from '../pages/HrPanelUsers';
-import HrEvents from '../pages/HrEvents';
-import HrEventsAdd from '../pages/HrEventsAdd';
-import UserMain from '../pages/UserMain';
+import HrPanelUsers from '../pages/Hr/Users/AddUser';
+import HrEvents from '../pages/Hr/Events/EventsPanel';
+import HrEventsAdd from '../pages/Hr/Events/AddEvent';
+import UserMain from '../pages/User/UserMain';
 
 const AuthRouter = () => {
-  const { roles } = React.useContext(RolesContext);
+  const { roles } = React.useContext(AuthContext);
 
-  return (roles == 'HR') ? (
+  return (roles.includes('HR')) ? (
     <Routes>
       <Route />
-      <Route path="/main" element={<Navigate to="/hr/users/view" />} />
-      <Route path="/login" element={<Navigate to="/hr/users/view" />} />
-      <Route path="" element={<Navigate to="/hr/users/view" />} />
-      <Route path="/hr/users/view" element={<HrPanelUsers />} />
-      <Route path="/hr/users/add" element={<HrPanelAddUser />} />
-      <Route path="/hr/events" element={<HrEvents />} />
-      <Route path="/hr/events/add" element={<HrEventsAdd />} />
+      <Route path="/main" element={<Navigate to="/userspanel" />} />
+      <Route path="/login" element={<Navigate to="/userspanel" />} />
+      <Route path="" element={<Navigate to="/userspanel" />} />
+      <Route path="/userspanel" element={<HrPanelUsers />} />
+      <Route path="/userspanel/add" element={<HrPanelAddUser />} />
+      <Route path="/eventspanel" element={<HrEvents />} />
+      <Route path="/eventspanel/add" element={<HrEventsAdd />} />
     </Routes>
   ) : (
     <div>

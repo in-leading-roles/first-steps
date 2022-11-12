@@ -2,49 +2,40 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 import AppRouter from './component/AppRouter';
-import { Calendar } from '../client/component/Calendar';
-import { AuthContext, RolesContext } from './context';
-import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
-import HrPanelAddUsers from './pages/HrPanelAddUser';
+import { AuthContext } from './context';
 
 const App = () => {
   const [isAuth, setIsAuth] = React.useState(null);
-  const [isLoading, setLoading] = React.useState(true);
   const [roles, setRoles] = React.useState(null);
+  const [isLoading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     if (localStorage.getItem('auth')) {
       setIsAuth(true);
-      console.log('isAuth', isAuth)
-    }else{
+      console.log('IsAuth', true);
+    } else {
       setIsAuth(false);
+      console.log('IsAuth', false);
     }
-    if (localStorage.getItem('roles')) {
-      setRoles(localStorage.getItem('roles'));
-      console.log(localStorage.getItem('roles'))
-    }
+    setRoles(localStorage.getItem('roles'));
+    console.log(localStorage.getItem('roles'));
     setLoading(false);
   }, []);
 
   return (
-    <RolesContext.Provider
+    <AuthContext.Provider
       value={{
+        isAuth,
+        setIsAuth,
         roles,
         setRoles,
+        isLoading,
       }}
     >
-      <AuthContext.Provider
-        value={{
-          isAuth,
-          setIsAuth,
-          isLoading,
-        }}
-      >
-        <BrowserRouter>
-          <AppRouter />
-        </BrowserRouter>
-      </AuthContext.Provider>
-    </RolesContext.Provider>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </AuthContext.Provider>
   );
 };
 

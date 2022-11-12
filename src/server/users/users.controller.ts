@@ -16,12 +16,6 @@ import { Team } from 'src/server/teams/teams.model';
 export class UsersController {
   constructor(private userService: UsersService) {}
 
-  @SkipAuth()
-  @Get("getbylogin/:login")
-  getByLogin(@Param('login') login: string){
-    return this.userService.getByLogin(login);
-  }
-
   @ApiOperation({ summary: 'Получение всех пользователей' })
   @ApiResponse({ status: 200, type: [User] })
   @Get()

@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+
 import { InjectModel } from '@nestjs/sequelize';
 import { UsersService } from '../users/users.service';
 import { CreateEventsDto } from './dto/create-events.dto';
 import { Event } from '../models/events.model';
+import { Injectable } from '@nestjs/common'; 
 
 @Injectable()
 export class EventsService {    

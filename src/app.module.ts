@@ -15,10 +15,13 @@ import { UserTeams } from "./server/teams/user-teams.model";
 import { UserEvents } from "./server/events/users-events.model";
 import { RegularEventsModule } from "./server/regular-events/regular-events.module";
 import { RegularEvent } from "./server/models/regular-events.model";
+import { ScheduleModule } from "@nestjs/schedule";
+import { EventsService } from "./server/events/events.service";
 
 @Global()
 @Module({
     imports: [
+        ScheduleModule.forRoot(),
         ConfigModule.forRoot({
             envFilePath: `.${process.env.NODE_ENV}.env`,
         }),

@@ -1,5 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Cron, CronExpression, Interval } from '@nestjs/schedule';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { SimpleConsoleLogger } from 'typeorm';
 import { Roles } from '../auth/roles-auth/roles.decorator';
 import { RegularEvent } from '../models/regular-events.model';
 import { CreateTeamDto } from '../teams/dto/create-team.dto';

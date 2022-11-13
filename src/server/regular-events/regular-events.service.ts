@@ -1,4 +1,6 @@
+import { Schedule } from '@mui/icons-material';
 import { Injectable } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { InjectModel } from '@nestjs/sequelize';
 import { RegularEvent } from '../models/regular-events.model';
 import { CreateRegularEventDto } from './dto/create-regular-event.dto';
@@ -42,5 +44,10 @@ export class RegularEventsService {
         const regularEvent = await this.getById(id);
         await this.regularEventRepository.update(({eventId: null, ...regularEvent}), { where: { id } });
         return this.getById(id);
+    }
+
+//    @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
+    handleCron() {
+        console.log("EBAT COPAT")
     }
 }

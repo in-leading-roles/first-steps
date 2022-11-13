@@ -51,9 +51,24 @@ export class RegularEventsService {
 
     //    @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
     async handleCron() {
-        // let currentDate  = new Date();
-        // currentDate.setDate(currentDate.getDate() + 7);
-        // console.log(currentDate)
+        let currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() + 7);
+        
+        let lastAddedEvent: Event;
+        (await this.getPlannedEvents()).map((event)=>{
+            if(event.startDate < currentDate){
+                // lastAddedEvent = Promise.all([this.eventsService.createEvent(event)])[0]
+                lastAddedEvent = Promise.all([this.eventsService.getEventById(event.id)])[0]
+
+            }
+        })
+        lastAddedEvent.regularEvents.map(()=>{
+
+        })
+
+        // })
+        // this.addEventToRegularEvent(lastAddedEvent.eve, lastAddedEvent.id)
+
     }
 
 
@@ -106,6 +121,17 @@ export class RegularEventsService {
                     break;
             }
         })
-        return events;
+        
+        let resulr = events.filter((item, index) => {
+            return events.indexOf(item) === index
+        });
+        let result = events.reduce((result, item) => {
+            return result.map((r)=>{
+                return JSON.stringify(r) 
+            })
+            .includes(JSON.stringify(item)) ? result : [... result, item];
+        }, []);
+
+        return result;
     }
 }

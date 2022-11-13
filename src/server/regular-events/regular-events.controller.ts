@@ -127,7 +127,7 @@ export class RegularEventsController {
       example: 'id',
       type: 'string',
     })
-    deleteEvent(@Param('regularEventId') regularEventId: string, @Param('eventId') eventId: string) {
-      return this.regluarEventsService.deleteEventRegularEvent(regularEventId, eventId);
+    deleteEvent(@Param('regularEventId') regularEventId: string) {
+      return this.regluarEventsService.deleteEventRegularEvent(regularEventId);
     }
 }

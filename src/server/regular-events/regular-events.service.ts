@@ -7,6 +7,7 @@ import { EventsService } from '../events/events.service';
 import { RegularEvent } from '../models/regular-events.model';
 import { CreateRegularEventDto } from './dto/create-regular-event.dto';
 import { Event } from '../models/events.model'
+import { CreateEventsDto } from '../events/dto/create-events.dto';
 
 @Injectable()
 export class RegularEventsService {
@@ -43,16 +44,30 @@ export class RegularEventsService {
         return this.getById(id);
     }
 
-    async deleteEventRegularEvent(id: string, eventId: string) {
+    async deleteEventRegularEvent(id: string) {
         const regularEvent = await this.getById(id);
         await this.regularEventRepository.update(({ eventId: null, ...regularEvent }), { where: { id } });
         return this.getById(id);
     }
 
-    //    @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
+    @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
     async handleCron() {
         let deadLine = new Date();
         deadLine.setDate(deadLine.getDate() + 7);
+
+        let EventsStringify: string[] = [];
+        (await this.eventsService.getAllEvents()).map((event) => {
+            EventsStringify.push(JSON.stringify({ title: event.title, content: event.content, startDate: event.startDate, endDate: event.endDate }))
+        });
+
+        (await this.getPlannedEventsWithFilter()).map((event) => {
+            if (event.startDate < deadLine) {
+                if (! (EventsStringify.includes( JSON.stringify({ title: event.title, content: event.content, startDate: event.startDate, endDate: event.endDate })))) {
+                    let createEventsDtoTwo = new CreateEventsDtoTwo(event.title, event.content, event.startDate, event.endDate, event.UserId);
+                    this.eventsService.createEventWithoutDTO(createEventsDtoTwo)
+                }
+            }
+        });
 
         let EventsToAdd = [];
 
@@ -81,11 +96,20 @@ export class RegularEventsService {
             maxElements[`${element.regularEventId}`] = element
         })
 
-        return Object.values(maxElements)
+        EventsToAdd.map((element) => {
+            let test = this.addEventToRegularEventByParameters(element.title, element.content, element.startDate, element.endDate, element.regularEventId, element.id);
+        })
 
+        return Object.values(maxElements)
     }
 
-    async getPlannedEventsWithFilter() { //TODO: добавь в контроллер вместо getPlannedEvents
+    private async addEventToRegularEventByParameters(title, content, startDate, endDate, regularEventId, eventId) {
+        let event = await this.eventsService.getEventByParameters(title, content, startDate, endDate);
+        return await this.addEventToRegularEvent(regularEventId, String(event.id));
+        
+    }
+
+    async getPlannedEventsWithFilter() {
         let eventsArray = await Promise.all([this.getPlannedEvents()]);
         let events = eventsArray[0];
         let result = events.reduce((result, item) => {
@@ -94,25 +118,26 @@ export class RegularEventsService {
             })
                 .includes(JSON.stringify({ title: item.title, content: item.content, startDate: item.startDate, endDate: item.endDate })) ? result : [...result, item];
         }, []);
+
         return result;
     }
 
-    async getPlannedEvents() {
-        const regularEventsPromise = await Promise.all([this.getAll()])
-        const regularEvents = regularEventsPromise[0].map(regularEvent => {
+    private async getPlannedEvents() {
+        const regularEventsPromise: RegularEvent[][] = await Promise.all([this.getAll()])
+        const regularEvents: RegularEvent[] = regularEventsPromise[0].map(regularEvent => {
             return regularEvent.dataValues;
         });
 
-        let events = [];
+        let events: any[] = [];
 
         regularEvents.map((regularEvent) => {
-            let typeInterval = regularEvent.repeatEvery.split(' ')[1]
-            let valueInterval = regularEvent.repeatEvery.split(' ')[0]
+            let typeInterval: string = regularEvent.repeatEvery.split(' ')[1]
+            let valueInterval: string = regularEvent.repeatEvery.split(' ')[0]
 
-            let event = regularEvent.event.dataValues;
+            let event: Event = regularEvent.event.dataValues;
 
             let oldMonth = event.startDate.getMonth();
-            let oldYear = event.startDate.getFullYear();
+            let oldYear: number = event.startDate.getFullYear();
 
             switch (typeInterval) {
                 case 'day':
@@ -150,4 +175,24 @@ export class RegularEventsService {
 
         return events;
     }
+}
+
+class CreateEventsDtoTwo {
+    constructor(title: string, content: string, startDate: Date, endDate: Date, UserId: string) {
+        this.title = title;
+        this.content = content;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.UserId = UserId;
+    }
+
+    title: string;
+
+    content: string;
+
+    startDate: Date;
+
+    endDate: Date;
+
+    UserId: string;
 }

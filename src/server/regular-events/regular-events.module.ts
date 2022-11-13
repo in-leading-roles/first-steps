@@ -7,7 +7,7 @@ import { RegularEventsService } from './regular-events.service';
 import { EventsModule } from '../events/events.module';
 
 @Module({
-  imports:[SequelizeModule.forFeature([RegularEvent, Event])],
+  imports:[SequelizeModule.forFeature([RegularEvent, Event]), EventsModule],
   controllers: [RegularEventsController],
   providers: [RegularEventsService]
 })

@@ -7,7 +7,7 @@ import { UsersService } from 'src/server/users/users.service';
 @Injectable()
 export class TeamsService {
 
-    constructor (@InjectModel(Team) private teamRepository: typeof Team,  private usersService:UsersService ) {}
+    constructor (@InjectModel(Team) private teamRepository: typeof Team, private usersService:UsersService ) {}
     async createTeam(dto:CreateTeamDto) {
         const team = await this.teamRepository.create(dto);
         return team;

@@ -19,6 +19,16 @@ export class RegularEventsController {
     getAll() {
       return this.regluarEventsService.getAll();
     }
+
+    @Get('/crone')
+    CroneTest() {
+      return this.regluarEventsService.handleCron();
+    }
+
+    @Get('/plannedevents')
+    getPlannedEvents() {
+      return this.regluarEventsService.getPlannedEvents();
+    }
   
     @ApiOperation({ summary: 'Получение команды по id' })
     @ApiResponse({ status: 200, type: RegularEvent })

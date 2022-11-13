@@ -65,28 +65,52 @@ export class RegularEventsService {
         });
         let events = [];
         regularEvents.map((regularEvent) => {
-            let typeIterval = regularEvent.repeatEvery.split(' ')[1]
-            let valueIterval = regularEvent.repeatEvery.split(' ')[0]
-            switch (typeIterval) {
-                case 'day':
-                    break;
-                case 'month':
-                    break;
-                case 'year':
-                    break;
-            }
-
+            let typeInterval = regularEvent.repeatEvery.split(' ')[1]
+            let valueInterval = regularEvent.repeatEvery.split(' ')[0]
 
             let event = regularEvent.event.dataValues;
-
             let oldMounth = event.startDate.getMonth();
-            while (oldMounth == ((event.startDate).getMonth())) {
 
-                event.startDate.setDate(event.startDate.getDate() + 1);
-                event.endDate.setDate(event.endDate.getDate() + 1);
+            switch (typeInterval) {
+                case 'day':
+                    while (oldMounth == ((event.startDate).getMonth())) {
 
-                events.push({ ...event, startDate: new Date(event.startDate.valueOf()), endDate: new Date(event.endDate.valueOf()) });
+                        event.startDate.setDate(event.startDate.getDate() + Number(valueInterval));
+                        event.endDate.setDate(event.endDate.getDate() + Number(valueInterval));
+
+                        events.push({ ...event, startDate: new Date(event.startDate.valueOf()), endDate: new Date(event.endDate.valueOf()) });
+                    }
+                    break;
+                case 'week':
+                    while (oldMounth == ((event.startDate).getMonth())) {
+
+                        event.startDate.setDate(event.startDate.getDate() + (Number(valueInterval)*7));
+                        event.endDate.setDate(event.endDate.getDate() + (Number(valueInterval)*7));
+
+                        events.push({ ...event, startDate: new Date(event.startDate.valueOf()), endDate: new Date(event.endDate.valueOf()) });
+                    }
+                    break;
+                case 'year':
+                    while (oldMounth == ((event.startDate).getMonth())) {
+
+                        event.startDate.setDate(event.startDate.getDate() + Number(valueInterval));
+                        event.endDate.setDate(event.endDate.getDate() + Number(valueInterval));
+
+                        events.push({ ...event, startDate: new Date(event.startDate.valueOf()), endDate: new Date(event.endDate.valueOf()) });
+                    }
+                    break;
             }
+
+
+            // let event = regularEvent.event.dataValues;
+
+            // while (oldMounth == ((event.startDate).getMonth())) {
+
+            //     event.startDate.setDate(event.startDate.getDate() + 1);
+            //     event.endDate.setDate(event.endDate.getDate() + 1);
+
+            //     events.push({ ...event, startDate: new Date(event.startDate.valueOf()), endDate: new Date(event.endDate.valueOf()) });
+            // }
         })
         return events;
     }

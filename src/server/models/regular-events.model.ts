@@ -17,9 +17,9 @@ export class RegularEvent extends Model<RegularEvent, EegularEventCreationAttrs>
     @Column({type: DataType.STRING, allowNull: false})
     repeatEvery: String;
 
-    @BelongsTo(()=>Event)
-    event: Event
-
     @ForeignKey(() => Event)
     eventId: number
+
+    @BelongsTo(()=>Event)
+    event: Event
 }

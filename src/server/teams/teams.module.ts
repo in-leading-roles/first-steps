@@ -9,9 +9,6 @@ import { UserTeams } from './user-teams.model';
 @Module({
   imports:[SequelizeModule.forFeature([Team,UserTeams]),forwardRef(()=> UsersModule)],
   controllers: [TeamsController],
-  providers: [TeamsService],
-  exports:[
-    TeamsService
-  ]
+  providers: [TeamsService]
 })
 export class TeamsModule {}

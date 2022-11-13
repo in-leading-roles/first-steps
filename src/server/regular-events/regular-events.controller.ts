@@ -1,6 +1,9 @@
-import { Controller, Get } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Roles } from '../auth/roles-auth/roles.decorator';
 import { RegularEvent } from '../models/regular-events.model';
+import { CreateTeamDto } from '../teams/dto/create-team.dto';
+import { CreateRegularEventDto } from './dto/create-regular-event.dto';
 import { RegularEventsService } from './regular-events.service';
 
 @ApiTags('Регулярные события')
@@ -15,90 +18,104 @@ export class RegularEventsController {
       return this.regluarEventsService.getAll();
     }
   
-    // @ApiOperation({ summary: 'Получение команды по id' })
-    // @ApiResponse({ status: 200, type: Team })
-    // @Get('/:id')
-    // @ApiParam({
-    //   name: 'id',
-    //   required: true,
-    //   description: 'id команды',
-    //   example: '1',
-    //   type: 'number',
-    // })
-    // getByValue(@Param('id') id: string) {
-    //   return this.teamsService.getTeamById(id);
-    // }
+    @ApiOperation({ summary: 'Получение команды по id' })
+    @ApiResponse({ status: 200, type: RegularEvent })
+    @Get('/:id')
+    @ApiParam({
+      name: 'id',
+      required: true,
+      description: 'id события',
+      example: '1',
+      type: 'number',
+    })
+    getByValue(@Param('id') id: string) {
+      return this.regluarEventsService.getById(id);
+    }
   
-    // @Roles("HR")
-    // @ApiOperation({ summary: 'Создание команды' })
-    // @ApiResponse({ status: 200, type: Team })
-    // @Post()
-    // create(@Body() dto: CreateTeamDto) {
-    //   return this.teamsService.createTeam(dto);
-    // }
+    @Roles("HR")
+    @ApiOperation({ summary: 'Создание регулярного события' })
+    @ApiResponse({ status: 200, type: RegularEvent })
+    @Post()
+    create(@Body() dto: CreateRegularEventDto) {
+      return this.regluarEventsService.create(dto);
+    }
   
-    // @Roles("HR")
-    // @ApiOperation({ summary: 'Удаление команды' })
-    // @ApiResponse({
-    //   status: 200, description: JSON.stringify({
-    //     destroyedRows: 1
-    //   })
-    // })
-    // @Delete('/:id')
-    // delete(@Param('id') id: string) {
-    //   return this.teamsService.deleteTeam(id);
-    // }
+    @Roles("HR")
+    @ApiOperation({ summary: 'Удаление регулярного события' })
+    @ApiResponse({
+      status: 200, description: JSON.stringify({
+        destroyedRows: 1
+      })
+    })
+    @ApiParam({
+      name: 'id',
+      required: true,
+      description: 'id регулярного события',
+      example: 'id',
+      type: 'string',
+    })
+    @Delete('/:id')
+    delete(@Param('id') id: string) {
+      return this.regluarEventsService.delete(id);
+    }
   
-    // @Roles("HR")
-    // @ApiOperation({ summary: 'Редактирование команды' })
-    // @ApiResponse({ status: 200, type: Team })
-    // @Put('/:id')
-    // update(@Param('id') id: string, @Body() dto: CreateTeamDto) {
-    //   return this.teamsService.updateTeam(id, dto);
-    // }
+    @Roles("HR")
+    @ApiOperation({ summary: 'Редактирование регулярного события' })
+    @ApiResponse({ status: 200, type: RegularEvent })
+    @ApiParam({
+      name: 'id',
+      required: true,
+      description: 'id регулярного события',
+      example: 'id',
+      type: 'string',
+    })
+    @Put('/:id')
+    update(@Param('id') id: string, @Body() dto: CreateRegularEventDto) {
+      return this.regluarEventsService.update(id, dto);
+    }
   
-    // @Roles("HR")
-    // @ApiOperation({ summary: 'Добавление пользователя в команду' })
-    // @ApiResponse({ status: 200, type: Team })
-    // @Put('/userteam/:userId/:teamId')
-    // @ApiParam({
-    //   name: 'userId',
-    //   required: true,
-    //   description: 'id пользователя',
-    //   example: 'id',
-    //   type: 'string',
-    // })
-    // @ApiParam({
-    //   name: 'teamId',
-    //   required: true,
-    //   description: 'id команды',
-    //   example: 'id',
-    //   type: 'string',
-    // })
-    // addUser(@Param('userId') userId: string, @Param('teamId') teamId: string) {
-    //   return this.teamsService.addUserToTeam(userId, teamId);
-    // }
+    @Roles("HR")
+    @ApiOperation({ summary: 'Добавление события к регулярному событию' })
+    @ApiResponse({ status: 200, type: RegularEvent })
+    @Put('/eventregularevent/:regularEventId/:eventId')
+    @ApiParam({
+      name: 'regularEventId',
+      required: true,
+      description: 'id регулярного события',
+      example: 'id',
+      type: 'string',
+    })
+    @ApiParam({
+      name: 'eventId',
+      required: true,
+      description: 'id события',
+      example: 'id',
+      type: 'string',
+    })
+    addEvent(@Param('regularEventId') regularEventId: string, @Param('eventId') eventId: string) {
+      return this.regluarEventsService.addEventToRegularEvent(regularEventId, eventId);
+    }
   
   
-    // @Roles("HR")
-    // @ApiOperation({ summary: 'Удаление пользователя из команды' })
-    // @ApiResponse({ status: 200, type: Team })
-    // @Delete('/userteam/:userId/:teamId')
-    // @ApiParam({
-    //   name: 'userId',
-    //   required: true,
-    //   description: 'id пользователя',
-    //   example: 'id',
-    //   type: 'string',
-    // })
-    // @ApiParam({
-    //   name: 'teamId',
-    //   required: true,
-    //   description: 'id команды',
-    //   example: 'id',
-    //   type: 'string',
-    // })
-    // deleteUser(@Param('userId') userId: string, @Param('teamId') teamId: string) {
-    //   return this.teamsService.deleteUserFromTeam(userId, teamId);
-    // }
+    @Roles("HR")
+    @ApiOperation({ summary: 'Удаление события из регулярного события' })
+    @ApiResponse({ status: 200, type: RegularEvent })
+    @Delete('/eventregularevent/:regularEventId/:eventId')
+    @ApiParam({
+      name: 'regularEventId',
+      required: true,
+      description: 'id регулярного события',
+      example: 'id',
+      type: 'string',
+    })
+    @ApiParam({
+      name: 'eventId',
+      required: true,
+      description: 'id события',
+      example: 'id',
+      type: 'string',
+    })
+    deleteEvent(@Param('regularEventId') regularEventId: string, @Param('eventId') eventId: string) {
+      return this.regluarEventsService.deleteEventRegularEvent(regularEventId, eventId);
+    }
 }

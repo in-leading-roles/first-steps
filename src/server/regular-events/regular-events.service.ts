@@ -69,12 +69,13 @@ export class RegularEventsService {
             let valueInterval = regularEvent.repeatEvery.split(' ')[0]
 
             let event = regularEvent.event.dataValues;
-            let oldMounth = event.startDate.getMonth();
+            let oldMonth = event.startDate.getMonth();
+            let oldYear = event.startDate.getFullYear();
+            console.log(oldYear);
 
             switch (typeInterval) {
                 case 'day':
-                    while (oldMounth == ((event.startDate).getMonth())) {
-
+                    while (oldMonth == ((event.startDate).getMonth())) {
                         event.startDate.setDate(event.startDate.getDate() + Number(valueInterval));
                         event.endDate.setDate(event.endDate.getDate() + Number(valueInterval));
 
@@ -82,35 +83,28 @@ export class RegularEventsService {
                     }
                     break;
                 case 'week':
-                    while (oldMounth == ((event.startDate).getMonth())) {
+                    while (oldMonth == ((event.startDate).getMonth())) {
+                        event.startDate.setDate(event.startDate.getDate() + (Number(valueInterval) * 7));
+                        event.endDate.setDate(event.endDate.getDate() + (Number(valueInterval) * 7));
 
-                        event.startDate.setDate(event.startDate.getDate() + (Number(valueInterval)*7));
-                        event.endDate.setDate(event.endDate.getDate() + (Number(valueInterval)*7));
+                        events.push({ ...event, startDate: new Date(event.startDate.valueOf()), endDate: new Date(event.endDate.valueOf()) });
+                    }
+                    break;
+                case 'month':
+                    while (oldYear == ((event.startDate).getFullYear())) {
+                        event.startDate.setMonth(event.startDate.getMonth() + Number(valueInterval));
+                        event.endDate.setMonth(event.endDate.getMonth() + Number(valueInterval));
 
                         events.push({ ...event, startDate: new Date(event.startDate.valueOf()), endDate: new Date(event.endDate.valueOf()) });
                     }
                     break;
                 case 'year':
-                    while (oldMounth == ((event.startDate).getMonth())) {
+                    event.startDate.setFullYear(event.startDate.getFullYear() + Number(valueInterval));
+                    event.startDate.setFullYear(event.endDate.getFullYear() + Number(valueInterval));
 
-                        event.startDate.setDate(event.startDate.getDate() + Number(valueInterval));
-                        event.endDate.setDate(event.endDate.getDate() + Number(valueInterval));
-
-                        events.push({ ...event, startDate: new Date(event.startDate.valueOf()), endDate: new Date(event.endDate.valueOf()) });
-                    }
+                    events.push({ ...event, startDate: new Date(event.startDate.valueOf()), endDate: new Date(event.endDate.valueOf()) });
                     break;
             }
-
-
-            // let event = regularEvent.event.dataValues;
-
-            // while (oldMounth == ((event.startDate).getMonth())) {
-
-            //     event.startDate.setDate(event.startDate.getDate() + 1);
-            //     event.endDate.setDate(event.endDate.getDate() + 1);
-
-            //     events.push({ ...event, startDate: new Date(event.startDate.valueOf()), endDate: new Date(event.endDate.valueOf()) });
-            // }
         })
         return events;
     }

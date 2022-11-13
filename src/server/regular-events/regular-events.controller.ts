@@ -27,7 +27,7 @@ export class RegularEventsController {
 
     @Get('/plannedevents')
     getPlannedEvents() {
-      return this.regluarEventsService.getPlannedEvents();
+      return this.regluarEventsService.getPlannedEventsWithFilter();
     }
   
     @ApiOperation({ summary: 'Получение команды по id' })

@@ -80,24 +80,21 @@ export class RegularEventsService {
         EventsToAdd.map((element) => {
             maxElements[`${element.regularEventId}`] = element
         })
-        
-        return Object.values(maxElements)
-        
 
-        // })
-        // this.addEventToRegularEvent(lastAddedEvent.eve, lastAddedEvent.id)
+        return Object.values(maxElements)
 
     }
 
     async getPlannedEventsWithFilter() { //TODO: добавь в контроллер вместо getPlannedEvents
-        let events = await Promise.all([this.getPlannedEvents()])[0];
-
+        let eventsArray = await Promise.all([this.getPlannedEvents()]);
+        let events = eventsArray[0];
         let result = events.reduce((result, item) => {
             return result.map((r) => {
                 return JSON.stringify({ title: r.title, content: r.content, startDate: r.startDate, endDate: r.endDate })
             })
                 .includes(JSON.stringify({ title: item.title, content: item.content, startDate: item.startDate, endDate: item.endDate })) ? result : [...result, item];
         }, []);
+        return result;
     }
 
     async getPlannedEvents() {

@@ -1,3 +1,3 @@
-import { User } from "src/server/users/users.model"
+import { User } from "src/server/models/users.model"
 
 export type GetUsersResponse = Promise<User[]>

@@ -1,6 +1,6 @@
-import { Event } from "src/server/events/events.model"
-import { Role } from "src/server/roles/roles.model";
-import { User } from "src/server/users/users.model"
+import { Event } from "src/server/models/events.model"
+import { Role } from "src/server/models/roles.model";
+import { User } from "src/server/models/users.model"
 
 export type LoginResponse = Promise<{
     roles: Role[];

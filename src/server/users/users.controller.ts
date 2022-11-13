@@ -3,13 +3,13 @@ import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { SkipAuth } from '../auth/jwt-auth/skip-auth.decorator';
 import { GetUserEventsResponse } from 'src/common/GetUserEventsResponse';
 import { GetUsersResponse } from 'src/common/GetUsersResponse';
-import { Event } from '../events/events.model';
-import { Role } from '../roles/roles.model';
+import { Event } from '../models/events.model';
+import { Role } from '../models/roles.model';
 import { createUserDto } from './dto/create-user.dto';
-import { User } from './users.model';
+import { User } from '../models/users.model';
 import { UsersService } from './users.service';
 import { GetUserTeamsResponse } from 'src/common/GetUserTeamsResponse';
-import { Team } from 'src/server/teams/teams.model';
+import { Team } from 'src/server/models/teams.model';
 
 @ApiTags('Пользователи')
 @Controller('users')

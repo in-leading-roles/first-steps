@@ -1,7 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
-import { User } from "../users/users.model";
-import { UserEvents } from "./users-events.model";
+import { BelongsToMany, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { User } from "./users.model";
+import { UserEvents } from "../events/users-events.model";
+import { RegularEvent } from "./regular-events.model";
 
 interface EventCreationAttrs{
     title: string;
@@ -18,7 +19,7 @@ export class Event extends Model<Event, EventCreationAttrs>{
     id: number;
 
     @ApiProperty({example: 'Заголовок', description: 'Содержимое заголовка'})
-    @Column({type: DataType.STRING, unique: true, allowNull: false})
+    @Column({type: DataType.STRING, unique: false, allowNull: false})
     title: string;
     
     @ApiProperty({example: 'Обыкновенное описание события', description: 'Содержимое события'})
@@ -36,4 +37,6 @@ export class Event extends Model<Event, EventCreationAttrs>{
     @BelongsToMany(()=>User, ()=>UserEvents)
     users: User[]
 
+    @HasMany(() => RegularEvent)
+    regularEvents: RegularEvent[];
 }

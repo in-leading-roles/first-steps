@@ -1,11 +1,12 @@
-import { Injectable } from '@nestjs/common';
+
 import { InjectModel } from '@nestjs/sequelize';
 import { UsersService } from '../users/users.service';
 import { CreateEventsDto } from './dto/create-events.dto';
-import { Event } from './events.model';
+import { Event } from '../models/events.model';
+import { Injectable } from '@nestjs/common'; 
 
 @Injectable()
-export class EventsService {    
+export class EventsService {
     constructor (@InjectModel(Event) private eventsRepository: typeof Event, private userService:UsersService) {}
 
     async createEvent(dto: CreateEventsDto){
@@ -39,6 +40,16 @@ export class EventsService {
         const user = await this.userService.getUserById(userId);
         await event.$add('users', [user.id]);
         event.users = [user];
+        return event;
+    }
+
+    async createEventWithoutDTO(event: any) {
+        const createdEvent = await this.eventsRepository.create(event);
+        return createdEvent;
+    }
+  
+    async getEventByParameters(title, content, startDate, endDate) {
+        const event = await this.eventsRepository.findOne({where: {title, content, startDate, endDate}, include:{all:true}});
         return event;
     }
 }

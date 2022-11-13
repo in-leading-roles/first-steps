@@ -10,7 +10,7 @@ import {
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateEventsDto } from './dto/create-events.dto';
 import { EventsService } from './events.service';
-import { Event } from './events.model';
+import { Event } from '../models/events.model';
 import { Json } from 'sequelize/types/utils';
 import { Roles } from '../auth/roles-auth/roles.decorator';
 

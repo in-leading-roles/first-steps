@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { where } from 'sequelize';
 import { RolesService } from 'src/server/roles/roles.service';
 import { createUserDto } from './dto/create-user.dto';
-import { User } from './users.model';
+import { User } from '../models/users.model';
 import * as bcrypt from 'bcrypt'
 var passwordGenerator = require('password-generator-js');
 @Injectable()

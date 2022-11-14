@@ -7,6 +7,7 @@ import MyButton from '../../../component/UI/Button/MyButton';
 import HrPanelNavbar from '../HrPanelNavbar';
 import { Link } from 'react-router-dom';
 import { CreateEventResponce } from '../../../../common/CreateEventResponce';
+import { Calendar } from '../../../component/Calendar';
 
 const HrEventsAdd = () => {
   const [users, setUsers] = React.useState([]);
@@ -16,7 +17,7 @@ const HrEventsAdd = () => {
   const [startDateValue, setstartDate] = React.useState();
   const [endDateValue, setEndDate] = React.useState();
 
-  const handleForm = (e: React.FormEvent) => {
+  const AddEvent = (e: React.FormEvent) => {
     fetch('/events', {
       method: 'post',
       headers: new Headers({
@@ -30,7 +31,6 @@ const HrEventsAdd = () => {
       .then((res) => {
         if (res['title']) {
           window.location.href = "/eventspanel";
-        } else {
         }
       });
 
@@ -73,7 +73,8 @@ const HrEventsAdd = () => {
           }}
         />
       </LocalizationProvider>
-      <MyButton onClick={handleForm}>Добавить</MyButton>
+      <MyButton onClick={AddEvent}>Добавить</MyButton>
+      <Calendar />
     </div>
   );
 };

@@ -22,8 +22,30 @@ export const Calendar: React.FC = () => {
         Authorization: `Bearer ${localStorage.getItem('auth')}`,
       }),
     })
-      .then<GetUserEventsResponse>((res) => res.json())
-      .then(async (res) => setEvents(await res));
+      .then<GetUserEventsResponse>((res) => { 
+        return res.json() 
+      })
+      .then(async (res: Promise<any>) => {
+        console.log()
+        // setEvents([...await res])
+        return [...await res];
+      })
+      .then((resource) => {
+        console.log("events1", resource);
+        fetch('/regular-events/plannedevents', {
+          method: 'GET',
+          headers: new Headers({
+            Authorization: `Bearer ${localStorage.getItem('auth')}`,
+          }),
+        }).then<GetUserEventsResponse>((res) => res.json())
+          .then(async (res) => {
+            console.log("events2", events);
+            setEvents([...resource, ...await res]);
+          });
+      });
+
+
+
   }, []);
 
   return (

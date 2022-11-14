@@ -57,7 +57,8 @@ export class UsersService {
     }
 
     async updateUser(id:string,dto:createUserDto){
-        const team = await this.userRepository.update((dto), {where:{id}});
+        dto.password = await bcrypt.hash(dto.password, 5)
+        const user = await this.userRepository.update((dto), {where:{id}});
         return this.getUserById(id);
     }
 }

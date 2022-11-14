@@ -90,12 +90,11 @@ export class UsersController {
     return this.userService.getUserTeams(id);
   }
 
-  
-  @Users('1')
+  @Users()
+  @Put('/:id')
   @ApiOperation({summary: 'Редактирование пользователя'})
   @ApiResponse({status:200, type: User})
-  @Put('/:id')
   update(@Param('id') id: string, @Body() dto: createUserDto){
-      return this.userService.updateUser(id,dto);
+    return this.userService.updateUser(id,dto);
 }
 }

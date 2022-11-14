@@ -9,6 +9,7 @@ import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt-auth/jwt.strategy';
 import { RolesModule } from '../roles/roles.module';
 import { RolesGuard } from './roles-auth/roles.guard';
+import { UsersGuard } from './user-auth/users.guard';
 require('dotenv').config();
 
 @Module({
@@ -30,6 +31,10 @@ require('dotenv').config();
     {
       provide: APP_GUARD,
       useClass: RolesGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: UsersGuard,
     }
   ],
   controllers: [AuthController],

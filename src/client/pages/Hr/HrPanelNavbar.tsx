@@ -10,7 +10,8 @@ const HrPanelNavbar = ({ elements }) => {
     <Link to="/userspanel">Пользователи</Link>,
     <Link to="/eventspanel">События</Link>,
     <LogoutButton />
-    ]);
+    ],
+    );
   return (
     <div>
       <Navbar elements={elements} />

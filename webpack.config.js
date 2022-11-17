@@ -6,7 +6,7 @@ const {
 } = process.env;
 
 module.exports = {
-    mode: NODE_ENV || "production",
+    mode: NODE_ENV || "development",
     entry: './src/client/App.tsx',
     devtool: NODE_ENV !== 'production' ? 'inline-source-map' : '',
     output: {
@@ -29,13 +29,13 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', ".json"]
+        extensions: ['.ts', '.tsx', '.js', ".json", '.module.css', '.css']
     },
 
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
+                test: /\.(ts|tsx)?$/,
                 use: [
                     {
                         loader: 'ts-loader',
@@ -52,9 +52,12 @@ module.exports = {
                     { loader: 'style-loader' },
                     {
                         loader: "css-loader", options: {
+                            
                             importLoaders: 1,
+                            modules: true,
                         }
                     },
+                    { loader: "css-modules-typescript-loader"},
                     "sass-loader"
                 ]
             },

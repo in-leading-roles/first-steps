@@ -1,9 +1,9 @@
 import React from 'react';
-import { Button } from '@mui/material';
-
+import { style } from 'typestyle';
+const buttonStyle = style({backgroundColor:'green'})
 const MyButton = ({children, ...props}) => {
     return (
-        <Button {...props}>{children}</Button>
+        <button className={buttonStyle} {...props}>{children}</button>
     );
 };
 

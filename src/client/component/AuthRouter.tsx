@@ -2,7 +2,7 @@ import * as React from 'react';
 import { AuthContext } from '../context/index';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import HrPanelAddUser from '../pages/Hr/Users/UsersPanel';
-import Login from '../pages/Login';
+import Login from '../pages/Login/Login';
 import HrPanelUsers from '../pages/Hr/Users/AddUser';
 import HrEvents from '../pages/Hr/Events/EventsPanel';
 import HrEventsAdd from '../pages/Hr/Events/AddEvent';

@@ -3,6 +3,7 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { AppModule } from "./server/app.module";
 import {NestExpressApplication} from '@nestjs/platform-express';
 import * as path from 'path';
+import Agenda from "agenda";
 
 async function start() {
     const PORT = process.env.PORT || 5000;

@@ -3,13 +3,13 @@ import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { SkipAuth } from '../auth/jwt-auth/skip-auth.decorator';
 import { GetUserEventsResponse } from 'src/common/GetUserEventsResponse';
 import { GetUsersResponse } from 'src/common/GetUsersResponse';
-import { Event } from '../events/events.model';
-import { Role } from '../roles/roles.model';
+import { Event } from '../models/events.model';
+import { Role } from '../models/roles.model';
 import { createUserDto } from './dto/create-user.dto';
-import { User } from './users.model';
+import { User } from '../models/users.model';
 import { UsersService } from './users.service';
 import { GetUserTeamsResponse } from 'src/common/GetUserTeamsResponse';
-import { Team } from 'src/server/teams/teams.model';
+import { Team } from 'src/server/models/teams.model';
 import { UsersGuard } from '../auth/user-auth/users.guard';
 import { Users } from '../auth/user-auth/users.decorator';
 
@@ -19,12 +19,6 @@ import { Users } from '../auth/user-auth/users.decorator';
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
-
-  @SkipAuth()
-  @Get("getbylogin/:login")
-  getByLogin(@Param('login') login: string){
-    return this.userService.getByLogin(login);
-  }
 
   @ApiOperation({ summary: 'Получение всех пользователей' })
   @ApiResponse({ status: 200, type: [User] })

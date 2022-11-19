@@ -3,7 +3,7 @@ import { createUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '../users/users.model';
+import { User } from '../models/users.model';
 import { RolesService } from '../roles/roles.service';
 import { Password } from '@mui/icons-material';
 
@@ -30,7 +30,12 @@ export class AuthService {
 
   async login(userDto: createUserDto) {
     const user = await this.validateUser(userDto);
-    return this.generateToken(user);
+    console.log(user);
+    const token = await this.generateToken(user);
+    return {
+      token: token,
+      roles: user.roles
+    };
   }
 
   async registration(userDto: createUserDto) {
@@ -48,8 +53,6 @@ export class AuthService {
       return role.value;
     });
     const payload = { id: user.id, roles: rolesValues };
-    return {
-      token: this.jwtService.sign(payload),
-    };
+    return this.jwtService.sign(payload);
   }
 }

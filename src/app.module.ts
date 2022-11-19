@@ -1,22 +1,27 @@
 import { Global, Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { SequelizeModule } from "@nestjs/sequelize";
-import { User } from "./server/users/users.model";
+import { User } from "./server/models/users.model";
 import { UsersModule } from './server/users/users.module';
 import { RolesModule } from "./server/roles/roles.module";
-import { Role } from "./server/roles/roles.model";
-import { UserRoles } from "./server/roles/user-roles.model";
+import { Role } from "./server/models/roles.model";
+import { UserRoles } from "./server/models/user-roles.model";
 import { EventsModule } from './server/events/events.module';
-import { Event } from "./server/events/events.model";
+import { Event } from "./server/models/events.model";
 import { AuthModule } from "./server/auth/auth.module";
 import { TeamsModule } from './server/teams/teams.module';
-import { Team } from "./server/teams/teams.model";
+import { Team } from "./server/models/teams.model";
 import { UserTeams } from "./server/teams/user-teams.model";
 import { UserEvents } from "./server/events/users-events.model";
+import { RegularEventsModule } from "./server/regular-events/regular-events.module";
+import { RegularEvent } from "./server/models/regular-events.model";
+import { ScheduleModule } from "@nestjs/schedule";
+import { EventsService } from "./server/events/events.service";
 
 @Global()
 @Module({
     imports: [
+        ScheduleModule.forRoot(),
         ConfigModule.forRoot({
             envFilePath: `.${process.env.NODE_ENV}.env`,
         }),
@@ -27,7 +32,7 @@ import { UserEvents } from "./server/events/users-events.model";
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, Role, UserRoles, Event, UserEvents, Team,  UserTeams],
+            models: [User, Role, UserRoles, Event, UserEvents, Team,  UserTeams, RegularEvent],
             autoLoadModels: true,
           }),
         UsersModule,
@@ -35,6 +40,7 @@ import { UserEvents } from "./server/events/users-events.model";
         EventsModule,
         AuthModule,
         TeamsModule,
+        RegularEventsModule,
     ]
 })
 export class AppModule{}

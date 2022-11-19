@@ -1,4 +1,3 @@
-import { Event } from "src/server/events/events.model"
-import { User } from "src/server/users/users.model"
+import { Event } from "src/server/models/events.model"
 
 export type GetUserEventsResponse = Promise<Event[]>

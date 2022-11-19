@@ -1,10 +1,9 @@
 import { Button } from "@mui/material";
 import React from "react";
-import { AuthContext, RolesContext } from "../context";
+import { AuthContext } from "../context";
 
 const LogoutButton = () => {
-    const { isAuth, setIsAuth } = React.useContext(AuthContext);
-    const { roles, setRoles } = React.useContext(RolesContext);
+    const { isAuth, setIsAuth, roles, setRoles } = React.useContext(AuthContext);
     const handlePostForm = (e: React.FormEvent) => {
       setIsAuth(false);
       setRoles(null);

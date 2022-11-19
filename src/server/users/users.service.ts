@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { where } from 'sequelize';
 import { RolesService } from 'src/server/roles/roles.service';
 import { createUserDto } from './dto/create-user.dto';
-import { User } from './users.model';
+import { User } from '../models/users.model';
 import * as bcrypt from 'bcrypt'
 var passwordGenerator = require('password-generator-js');
 @Injectable()
@@ -18,11 +18,6 @@ export class UsersService {
 
     async getUserById(id: string) {
         const user = await this.userRepository.findOne({where: {id}, include:{all:true}});
-        return user;
-    }
-
-    async getByLogin(login: string) {
-        const user = await this.userRepository.findOne({where: {login}, include:{all:true}});
         return user;
     }
 
@@ -43,7 +38,7 @@ export class UsersService {
     }
     
     async findOne(login: string) {
-        return this.userRepository.findOne({where: {login}});
+        return this.userRepository.findOne({where: {login}, include:{all:true}});
     }
 
     async getUserRoles(id: string) {

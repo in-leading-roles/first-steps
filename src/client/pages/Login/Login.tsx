@@ -8,7 +8,9 @@ import 'whatwg-fetch';
 import { red } from '@mui/material/colors';
 import { style } from 'typestyle';
 import * as csx from 'csx';
-
+import { relative } from 'node:path/win32';
+import logo from './LoginSource/logo.png';
+import { Column } from 'sequelize-typescript';
 
 const Login = () => {
   const { isAuth, setIsAuth, roles, setRoles } = React.useContext(AuthContext);
@@ -42,32 +44,74 @@ const Login = () => {
     e.preventDefault();
   };
 
-  const logo = csx.url('./LoginSource/logo.png')
-  const imageLogo = style({
-    background: logo,
-  });
+  const body = style({
+    margin: '0',
+    padding: '0',
+    height: '1080px',
+    width: '1920px',
+    backgroundColor: '#5F9FFF',
+    backgroundSize: 'cover',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  })
+  const inputs = style({
+    display: 'flex',
+    flexDirection: 'column',
+  })
+  const inputLogin = style({
+    backgroundColor: "white",
+    borderRadius: '10px',
+  })
+  const inputPassword = style({
+    backgroundColor: "white",
+    borderRadius: '10px',
+  })
+  const lightBlueFrame = style({
+    width: '460px',
+    height: '512px',
+    borderRadius: '10px',
+    backgroundColor: '#aed7de',
+  })
+  const imagelogo = style({
+    height: '284px',
+    width: '249px',
+  })
 
   return (
-    <div>
+    <body className={body}>
+      <div className={lightBlueFrame}></div>
+      <div>
+      <img
+      className = {imagelogo}
+      src = {logo}
+      />
+      </div>
+      <div className = {inputs}>
       <TextField
+        className = {inputLogin}
         label="Логин"
         onChange={(e) => setLogin(e.target.value)}
         type="text"
       />
       <TextField
+        className = {inputPassword}
         label="Пароль"
         onChange={(e) => {
           setPassword(e.target.value);
         }}
         type="password"
-      />
+      /> 
       <Alert style={{ display: errorDisplay }} severity="error">
         Некорректный логин или пароль
       </Alert>
       <Button onClick={handlePostForm} variant="contained">
-        LOGIN
+        LOG IN
       </Button>
-    </div>
+      </div>
+    </body>
   );
 };
 export default Login;
+

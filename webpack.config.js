@@ -36,6 +36,7 @@ module.exports = {
         rules: [
             {
                 test: /\.(ts|tsx)?$/,
+                exclude: /(node_modules)/,
                 use: [
                     {
                         loader: 'ts-loader',
@@ -44,10 +45,11 @@ module.exports = {
                         }
                     }
                 ],
-                exclude: [/node_modules/, /dist/, /server/, /public/, /common/],
+
             },
             {
                 test: /\.(css|s[ac]ss)$/i,
+                exclude: /(node_modules)/,
                 use: [
                     { loader: 'style-loader' },
                     {
@@ -63,6 +65,7 @@ module.exports = {
             },
             {
                 test: /\.(png|jpe?g|gif|svg$)$/i,
+                exclude: /(node_modules)/,
                 use: [
                     {
                         loader: 'file-loader',

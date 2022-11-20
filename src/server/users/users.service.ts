@@ -50,4 +50,10 @@ export class UsersService {
         const user = await this.userRepository.findOne({where: {id}, include:{all:true}});
         return user.teams;
     }
+
+    async updateUser(id:string,dto:createUserDto){
+        dto.password = await bcrypt.hash(dto.password, 5)
+        const user = await this.userRepository.update((dto), {where:{id}});
+        return this.getUserById(id);
+    }
 }

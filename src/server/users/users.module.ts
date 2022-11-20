@@ -10,6 +10,8 @@ import { UserEvents } from '../events/users-events.model';
 import { Team } from 'src/server/models/teams.model';
 import { UserTeams } from 'src/server/teams/user-teams.model';
 import { TeamsModule } from 'src/server/teams/teams.module';
+import { JwtService } from '@nestjs/jwt';
+
 
 @Module({
   imports: [
@@ -17,7 +19,7 @@ import { TeamsModule } from 'src/server/teams/teams.module';
     RolesModule, TeamsModule
   ],
   controllers: [UsersController],
-  providers: [UsersService],
+  providers: [UsersService, JwtService],
   exports: [UsersService],
 })
 export class UsersModule {}

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { AuthContext } from '../context/index';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Loader from './UI/Loader/Loader';
-import Login from '../pages/Login';
+import Login from '../pages/Login/Login';
 import AuthRouter from './AuthRouter';
 
 const AppRouter = () => {

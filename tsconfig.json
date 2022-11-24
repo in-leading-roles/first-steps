@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
+    "typeRoots" : ["node_modules/@types", "src/types"],
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,

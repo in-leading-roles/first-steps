@@ -4,13 +4,15 @@ import { Button } from '@mui/material';
 import { AuthContext } from '../../context';
 import LogoutButton from '../../component/LogoutButton';
 import Navbar from '../../component/Navbar';
+import MyButton from '../../component/UI/Button/MyButton';
 
 const HrPanelNavbar = ({ elements }) => {
   elements = elements.concat([
-    <Link to="/userspanel">Пользователи</Link>,
-    <Link to="/eventspanel">События</Link>,
+    <MyButton onClick={()=> window.location.href = "/userspanel"}>Пользователи</MyButton>,
+    <MyButton onClick={()=> window.location.href = "/eventspanel"}>События</MyButton>,
     <LogoutButton />
-    ]);
+    ],
+    );
   return (
     <div>
       <Navbar elements={elements} />

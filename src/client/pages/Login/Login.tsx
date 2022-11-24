@@ -1,5 +1,5 @@
 import { FaxRounded, LogoDev, WindowSharp } from '@mui/icons-material';
-import { Box, Button, TextField, Alert } from '@mui/material';
+import { Box, Button, TextField, Alert, Hidden } from '@mui/material';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginResponse } from 'src/common/LoginResponse';
@@ -13,6 +13,11 @@ import logoPng from './LoginSource/images/logo.png';
 import whiteLogoPng from './LoginSource/images/whiteLogo.png';
 import { Column } from 'sequelize-typescript';
 import { ClassNames } from '@emotion/react';
+import { cssRaw } from "typestyle";
+
+cssRaw(`
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+`);
 
 const Login = () => {
   const { isAuth, setIsAuth, roles, setRoles } = React.useContext(AuthContext);
@@ -33,9 +38,9 @@ const Login = () => {
       .then<LoginResponse>(async (response) => {
         return await response.json();
       })
-      .then((response)=>{
+      .then((response) => {
         let roles = response['roles'];
-        let rolesValues = roles.map((role)=>{
+        let rolesValues = roles.map((role) => {
           return role['value'];
         })
         localStorage.setItem('roles', rolesValues);
@@ -47,11 +52,12 @@ const Login = () => {
   };
 
   const body = style({
+    overflow: 'hidden',
     margin: '0',
     padding: '0',
     position: 'relative',
     width: '1920px',
-    height: '1080px',
+    height: '965px',
     background: 'linear-gradient(73.8deg, #1263FF 12.24%, #5F9FFF 86.04%)',
   })
   const inputLogin = {
@@ -104,24 +110,24 @@ const Login = () => {
     // alignSelf: 'stretch',
   })
 
-   const lightBlueFrame = style({
+  const lightBlueFrame = style({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     padding: '0px 22px',
     gap: '31px',
-    
+
     position: 'absolute',
     width: '460px',
     height: '512px',
     left: '1135px',
     top: '284px',
-    
-   background: 'rgba(255, 255, 255, 0.5)',
-   boxShadow: '0px 4px 30px 10px rgba(0, 0, 0, 0.25)',
-   borderRadius: '10px',
-   })
+
+    background: 'rgba(255, 255, 255, 0.5)',
+    boxShadow: '0px 4px 30px 10px rgba(0, 0, 0, 0.25)',
+    borderRadius: '10px',
+  })
 
   const logo = style({
     display: 'flex',
@@ -136,11 +142,11 @@ const Login = () => {
     left: '291px',
     top: '240px',
   })
-  
+
   const imagelogo = style({
     width: '249px',
     height: '284px',
- 
+
     flex: 'none',
     order: '0',
     flexGrow: '0',
@@ -150,8 +156,7 @@ const Login = () => {
   const textLogo = style({
     width: '470px',
     height: '117px',
-
-    fontFamily: 'Montserrat',
+    fontFamily:'Roboto, sans-serif',
     fontStyle: 'normal',
     fontWeight: '700',
     fontSize: '96px',
@@ -165,13 +170,12 @@ const Login = () => {
   })
 
   const smallTextLogo = style({
+    fontFamily:'Roboto, sans-serif',
     position: 'absolute',
     width: '626px',
     height: '29px',
     left: '333px',
     top: '577px',
-
-    fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontWeight: '500',
     fontSize: '24px',
@@ -198,7 +202,7 @@ const Login = () => {
   })
 
   //пузыри нумеруются по часовой стрелке, начиная с правого верхнего
-  
+
   const bubble1 = style({
     background: 'linear-gradient(108.94deg, rgba(81, 233, 254, 0.83) 52.49%, rgba(152, 203, 240, 0) 119.99%)',
     borderRadius: '250px',
@@ -286,46 +290,46 @@ const Login = () => {
       <div></div>
       <div className={lightBlueFrame}>
         <img
-        className = {imagelogowhite}
-        src = {whiteLogoPng}
+          className={imagelogowhite}
+          src={whiteLogoPng}
         />
         <TextField
           fullWidth
-          sx = {inputLogin}
+          sx={inputLogin}
           label="Логин"
           onChange={(e) => setLogin(e.target.value)}
           type="text"
         />
         <TextField
           fullWidth
-          sx = {inputPassword}
+          sx={inputPassword}
           label="Пароль"
           onChange={(e) => {
             setPassword(e.target.value);
           }}
           type="password"
-        /> 
+        />
         <Alert style={{ display: errorDisplay }} severity="error">
           Некорректный логин или пароль
         </Alert>
-        <Button onClick={handlePostForm} variant="contained" className = {logIn}>
+        <Button onClick={handlePostForm} variant="contained" className={logIn}>
           LOG IN
         </Button>
       </div>
-      <div className = {logo}>
+      <div className={logo}>
         <img
-        className = {imagelogo}
-        src = {logoPng}
+          className={imagelogo}
+          src={logoPng}
         />
-        <div className = {textLogo}>
+        <div className={textLogo}>
           irst steps
         </div>
       </div>
-      <div className = {beam}></div>
-      <div className = {smallTextLogo}>
+      <div className={beam}></div>
+      <div className={smallTextLogo}>
         ПЛАТФОРМА ДЛЯ ОНБОРДИНГА СОТРУДНИКОВ
       </div>
-      
+
       <div className={bubble1}></div>
       <div className={bubble2}></div>
       <div className={bubble3}></div>

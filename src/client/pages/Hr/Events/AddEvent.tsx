@@ -18,6 +18,7 @@ const HrEventsAdd = () => {
   const [endDateValue, setEndDate] = React.useState();
 
   const AddEvent = (e: React.FormEvent) => {
+    
     fetch('/events', {
       method: 'post',
       headers: new Headers({

@@ -107,7 +107,6 @@ const Login = () => {
     flex: 'none',
     order: '1',
     flexGrow: '0',
-    // alignSelf: 'stretch',
   })
 
   const lightBlueFrame = style({
@@ -135,7 +134,6 @@ const Login = () => {
     justifyContent: 'center',
     alignItems: 'flex-end',
     padding: '0px',
-
     position: 'absolute',
     width: '638px',
     height: '315px',

@@ -7,6 +7,14 @@ import MyButton from '../../../component/UI/Button/MyButton';
 import HrPanelNavbar from '../HrPanelNavbar';
 import { Link } from 'react-router-dom';
 import { CreateEventResponce } from '../../../../common/CreateEventResponce';
+import LeftStrip from '../LeftStrip';
+import logoPng from './../../Login/LoginSource/images/logo.png';
+import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
+import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
+import LeftStripIcon from '../LeftStripIcon';
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
+import { style } from 'typestyle';
 
 const HrEventsAdd = () => {
   const [users, setUsers] = React.useState([]);
@@ -37,8 +45,28 @@ const HrEventsAdd = () => {
     e.preventDefault();
   };
 
+  const logoImg = style({
+    width: '49.54px',
+    height: '50px',
+  })
+
+  const leftStripIconIcon = style({
+    color:'white',
+    fontSize: 'xx-large !important',
+  })
+
   return (
     <div>
+    <LeftStrip elements={[
+        <img
+          src={logoPng}
+          className={logoImg}
+        />,
+      <LeftStripIcon isActieve={false} Path={'/userspanel'} Icon={<PersonOutlinedIcon className={leftStripIconIcon}/>}/>,
+      <LeftStripIcon isActieve={false} Path={'/userspanel/add'} Icon={<PersonAddOutlinedIcon className={leftStripIconIcon}/>}/>,
+      <LeftStripIcon isActieve={false} Path={'/eventspanel'} Icon={<EventAvailableOutlinedIcon className={leftStripIconIcon}/>}/>,
+      <LeftStripIcon isActieve={true} Path={'/eventspanel/add'} Icon={<CalendarTodayOutlinedIcon className={leftStripIconIcon}/>}/>,
+    ]} />
       <HrPanelNavbar elements={[]}  />
       <TextField
         label="Название события"
